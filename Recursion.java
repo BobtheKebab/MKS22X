@@ -5,7 +5,11 @@ public class Recursion {
     }
 
     public static double sqrt(double num) {
-	return sqrtHelper(num, 1.0);
+	if (num == 0.0) {
+	    return num;
+	} else {
+	    return sqrtHelper(num, 1.0);
+	}
     }
 
     private static double sqrtHelper(double target, double num) {
@@ -20,8 +24,6 @@ public class Recursion {
     }
 
     public static void main (String[] args) {
-
-	System.out.println(sqrt(4));
 
 	for (int count = 0; count < 11; count++) {
 	    double randNum = Math.random() * 100000 + 1;

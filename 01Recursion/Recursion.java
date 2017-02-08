@@ -5,6 +5,9 @@ public class Recursion {
     }
 
     public static double sqrt(double num) {
+	if (num < 0) {
+	    throw new IllegalArgumentException("i cant believe you've done this");
+	}
 	if (num == 0.0) {
 	    return num;
 	} else {

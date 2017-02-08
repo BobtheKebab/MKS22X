@@ -3,6 +3,11 @@ Pd 9
 
 public class NQueens {
 
-  public Constructor (int size) {
-    //make a new board
-  }
+       int[][] board
+       int solutionCount
+
+       public Constructor (int size) {
+       	      // fill in board
+       }
+
+       public solveHelper (int row, int col) {

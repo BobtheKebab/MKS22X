@@ -1,2 +1,8 @@
 Ahbab Ashraf
 Pd 9
+
+public class NQueens {
+
+  public Constructor (int size) {
+    //make a new board
+  }

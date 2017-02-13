@@ -71,11 +71,15 @@ public class QueenBoard {
 	for (int count = 0; count < board.length; count++) {
 	    if (board[count][col] == 0) {
 		addQueen(count, col);
-		return solveH(col + 1);
+		//System.out.println("Add Queen \n" + toString());
+		if (solveH(col + 1)) {
+		    return true;
+		} else {
+		    removeQueen(count, col);
+		    return false;
+		}
 	    }
 	}
-
-	return false;
     }
 
     public void updateBoardState () {
@@ -93,6 +97,7 @@ public class QueenBoard {
     }
 
     public String toString () {
+	updateBoardState();
 	return boardState;
     }
 

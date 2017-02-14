@@ -71,7 +71,6 @@ public class QueenBoard {
 	for (int count = 0; count < board.length; count++) {
 	    if (board[count][col] == 0) {
 		addQueen(count, col);
-		//System.out.println("Add Queen \n" + toString());
 		if (solveH(col + 1)) {
 		    return true;
 		} else {
@@ -85,11 +84,12 @@ public class QueenBoard {
     }
 
     private void updateBoardState () {
+	
 	boardState = "";
 	for (int[] ary : board) {
 	    for (int num : ary) {
 		if (num == -1) {
-		    boardState += "Q ";
+		    boardState += "~ ";
 		} else {
 		    boardState += num + " ";
 		}
@@ -109,31 +109,72 @@ public class QueenBoard {
     }
 
     private void reset () {
-	size = board.length;
+	int size = board.length;
 	board = new int[size][size];
     }
 
     public void countSolutions () {
-	int solutions = 0;
+	reset();
+        countSolutionsH(0);
+    }
+
+    private void countSolutionsH (int col) {
+
+	if (col == board.length) {
+	    updateBoardState();
+	    solutionCount++;
+	    return;
+	}
+
+	for (int count = 0; count < board.length; count++) {
+	    if (board[count][col] == 0) {
+		addQueen(count, col);
+		countSolutionsH(col + 1);
+		removeQueen(count, col);
+	    }
+	}
+	
+	return;
+	
     }
 
     public int getSolutionCount() {
-	return -1;
+	if (solutionCount == 0) {
+	    if (board.length == 2 || board.length == 3) {
+		return 0;
+	    } else {
+		return -1;
+	    }
+	} else {
+	    return solutionCount;
+	}
     }
 
     
 
     public static void main (String[] args) {
 
-	// QueenBoard board = new QueenBoard(4);
-	
-	int limit = 20;
-        for (int count = 1; count < limit + 1; count++) {
-	    QueenBoard board = new QueenBoard(count);
-	    board.solve();
-	    System.out.println(count + "\n" + board.toString());
+	int tock = 1;
+	if (tock == 1) {
+	    int lim = 12;
+	    for (int count = 1; count < lim + 1; count++) {
+		QueenBoard dank = new QueenBoard(count);
+		dank.countSolutions();
+		System.out.println(count + " " + dank.getSolutionCount());
+	    }
 	}
-	    
+
+	System.out.println("\n--------------------------------------------------------------------------\n");
+
+	int tick = 1;
+	if (tick  == 1) {
+	    int limit = 12;
+	    for (int count = 1; count < limit + 1; count++) {
+		QueenBoard board = new QueenBoard(count);
+		board.solve();
+		System.out.println(count + "\n" + board.toString());
+	    }
+	}
 
 	/*
 	board.addQueen(4, 4);

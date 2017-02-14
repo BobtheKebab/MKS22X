@@ -76,13 +76,15 @@ public class QueenBoard {
 		    return true;
 		} else {
 		    removeQueen(count, col);
-		    return false;
 		}
 	    }
 	}
+	
+	return false;
+	
     }
 
-    public void updateBoardState () {
+    private void updateBoardState () {
 	boardState = "";
 	for (int[] ary : board) {
 	    for (int num : ary) {
@@ -97,15 +99,41 @@ public class QueenBoard {
     }
 
     public String toString () {
+	return boardState;
+    }
+
+    // for debugging
+    public String toString (int num) {
 	updateBoardState();
 	return boardState;
     }
 
-    public static void main (String[] args) {
-	QueenBoard board = new QueenBoard(8);
+    private void reset () {
+	size = board.length;
+	board = new int[size][size];
+    }
 
-	board.solve();
-	System.out.println(board.toString());
+    public void countSolutions () {
+	int solutions = 0;
+    }
+
+    public int getSolutionCount() {
+	return -1;
+    }
+
+    
+
+    public static void main (String[] args) {
+
+	// QueenBoard board = new QueenBoard(4);
+	
+	int limit = 20;
+        for (int count = 1; count < limit + 1; count++) {
+	    QueenBoard board = new QueenBoard(count);
+	    board.solve();
+	    System.out.println(count + "\n" + board.toString());
+	}
+	    
 
 	/*
 	board.addQueen(4, 4);

@@ -2,10 +2,12 @@ public class KnightBoard {
     
     public int[][] board;
     private String boardState;
+    private int numKnights;
     
     public KnightBoard (int rows, int cols) {
 	board = new int[rows][cols];
 	updateBoardState();
+	numKnights = rows * cols;
     }
 
     public void updateBoardState () {
@@ -30,6 +32,19 @@ public class KnightBoard {
     public String toString (int num) {
 	updateBoardState();
 	return boardState;
+    }
+
+    public boolean Solve () {
+	return solveH(0, 0, 0);
+    }
+
+    private boolean solveH (int row, int col, int level) {
+	
+	if (level > numKnights) {
+	    updateBoardState();
+	    return true;
+	}
+
     }
 
     public static void main (String[] args) {

@@ -34,8 +34,18 @@ public class KnightBoard {
 	return boardState;
     }
 
+    private int[] ValidMoves (int row, int col) {
+	int[][] answer = new int[8][2];
+        try {
+	    if (!board[row - 2][col + 1] == 0) {
+		answer[0][1] = row -2;
+		answer[0][2] = col + 1;
+	    }
+
+	
+
     public boolean Solve () {
-	return solveH(0, 0, 0);
+	return solveH(0, 0, 1);
     }
 
     private boolean solveH (int row, int col, int level) {
@@ -44,6 +54,8 @@ public class KnightBoard {
 	    updateBoardState();
 	    return true;
 	}
+
+	board[row][col] = level;
 
     }
 

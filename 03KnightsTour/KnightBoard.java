@@ -3,6 +3,14 @@ public class KnightBoard {
     public int[][] board;
     private String boardState;
     private int numKnights;
+    private int[][] moves = { {-2, 1},
+			      {-2, -1},
+			      {2, 1},
+			      {2, -1}, 
+			      {-1, 2},
+			      {-1, -2},
+			      {1, 2},
+			      {-1, -2} };
     
     public KnightBoard (int rows, int cols) {
 	board = new int[rows][cols];
@@ -32,17 +40,7 @@ public class KnightBoard {
     public String toString (int num) {
 	updateBoardState();
 	return boardState;
-    }
-
-    private int[] ValidMoves (int row, int col) {
-	int[][] answer = new int[8][2];
-        try {
-	    if (!board[row - 2][col + 1] == 0) {
-		answer[0][1] = row -2;
-		answer[0][2] = col + 1;
-	    }
-
-	
+    }	
 
     public boolean Solve () {
 	return solveH(0, 0, 1);
@@ -56,6 +54,15 @@ public class KnightBoard {
 	}
 
 	board[row][col] = level;
+	for (int[] ary : moves) {
+	    try {
+		int newRow = row + ary[0];
+		int newCol = col + ary[1];
+		if (board[newRow][newCol ] != 0) {
+		    if (solveH(newRow, newCol, level + 1)) {
+			return true;
+		    } else {
+			
 
     }
 

@@ -3,13 +3,13 @@ public class KnightBoard {
     public int[][] board;
     private String boardState;
     private int numKnights;
-    private int[][] moves = { {-2, 1},
-			      {-2, -1},
-			      {2, 1},
-			      {2, -1}, 
+    private int[][] moves = { {-2, 1}, // up 2 right 1
+			      {-2, -1}, 
+			      {2, 1}, 
+			      {2, -1}, // down 2 left 1 
 			      {-1, 2},
 			      {-1, -2},
-			      {1, 2},
+			      {1, 2}, 
 			      {-1, -2} };
     
     public KnightBoard (int rows, int cols) {
@@ -23,9 +23,9 @@ public class KnightBoard {
 	for (int[] ary : board) {
 	    for (int num : ary) {
 		if (num < 10) {
-		    boardState += " " + num;
+		    boardState += "  " + num;
 		} else {
-		    boardState += num;
+		    boardState += " " + num;
 		}
 	    }
 	    boardState += "\n";
@@ -39,10 +39,10 @@ public class KnightBoard {
     // For debugging
     public String toString (int num) {
 	updateBoardState();
-	return boardState;
+	return boardState + numKnights;
     }	
 
-    public boolean Solve () {
+    public boolean solve () {
 	return solveH(0, 0, 1);
     }
 
@@ -53,22 +53,32 @@ public class KnightBoard {
 	    return true;
 	}
 
-	board[row][col] = level;
-	for (int[] ary : moves) {
-	    try {
+	if (board[row][col] <= 0) {
+	    for (int[] ary : moves) {
+		board[row][col] = level;
 		int newRow = row + ary[0];
 		int newCol = col + ary[1];
-		if (board[newRow][newCol ] != 0) {
+		if (isInBounds(newRow, newCol)) {
 		    if (solveH(newRow, newCol, level + 1)) {
 			return true;
-		    } else {
-			
+		    }
+		}
+		board[row][col] = 0;
+	    }
+	}
+	
+	return false;		
 
+    }
+
+    private boolean isInBounds (int row, int col) {
+	return (row >= 0 && col >= 0 && row < board.length && col < board[0].length);
     }
 
     public static void main (String[] args) {
 
 	KnightBoard dank = new KnightBoard(5, 5);
+	dank.solve();
 	System.out.println(dank.toString(0));
 
     }

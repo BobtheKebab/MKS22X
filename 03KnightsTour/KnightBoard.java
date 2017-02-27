@@ -3,7 +3,7 @@ public class KnightBoard {
     public int[][] board;
     private String boardState;
     private int numKnights;
-    private int[][] moves = { {-2, 1}, // up 2 right 1
+    private int[][] dankmoves = { {-2, 1}, // up 2 right 1
 			      {-2, -1}, 
 			      {2, 1}, 
 			      {2, -1}, // down 2 left 1 
@@ -60,13 +60,10 @@ public class KnightBoard {
 
 	if (board[row][col] == 0) {
 	    board[row][col] = level;
+	    int[][] moves = makePossibleMoves(row, col);
 	    for (int[] ary : moves) {
-		int newRow = row + ary[0];
-		int newCol = col + ary[1];
-		if (isInBounds(newRow, newCol)) {
-		    if (solveH(newRow, newCol, level + 1)) {
-			return true;
-		    }
+		if (isInBounds(ary[0], ary[1]) && solveH(ary[0], ary[1], level + 1)) {
+		    return true;
 		}
 	    }
 	    board[row][col] = 0;
@@ -78,6 +75,19 @@ public class KnightBoard {
 
     private boolean isInBounds (int row, int col) {
 	return (row >= 0 && col >= 0 && row < board.length && col < board[0].length);
+    }
+
+    private int[][] makePossibleMoves (int row, int col) {
+	int[][] moves = { {row - 2, col + 1}, // up 2 right 1
+			  {row - 2, col - 1}, 
+			  {row + 2, col + 1}, 
+			  {row + 2, col - 1}, // down 2 left 1 
+			  {row - 1, col + 2},
+			  {row - 1, col - 2},
+			  {row + 1, col + 2}, 
+			  {row - 1, col - 2} };
+
+	return moves;
     }
 
     public static void main (String[] args) {

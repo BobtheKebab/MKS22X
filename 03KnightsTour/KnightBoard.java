@@ -3,7 +3,7 @@ public class KnightBoard {
     public int[][] board;
     private String boardState;
     private int numKnights;
-    private int[][] dankmoves = { {-2, 1}, // up 2 right 1
+    private int[][] moves = { {-2, 1}, // up 2 right 1
 			      {-2, -1}, 
 			      {2, 1}, 
 			      {2, -1}, // down 2 left 1 
@@ -37,22 +37,30 @@ public class KnightBoard {
     }
 
     // For testing
-    public String toStringRun (int num) {
+    public String toStringRun () {
         solve();
-	return numKnights + "\n" + boardState;
+	String size = board.length + "x" + board[0].length;
+	return size + "\n" + boardState;
     }
 
     public void reset () {
         board = new int[board.length][board[0].length];
     }
 
-    public boolean solve () {
-	return solveH(0, 0, 1);
+    public void solve () {
+	if (numKnights == 1) {
+	    boardState = "1";
+	}  else { 
+	    solveH(0, 0, 1);
+	}
     }
 
     private boolean solveH (int row, int col, int level) {
+
+        //if (level < 2) System.out.println(this);
 	
 	if (level > numKnights) {
+	    System.out.println("IS SOLVED");
 	    updateBoardState();
 	    reset();
 	    return true;
@@ -60,9 +68,12 @@ public class KnightBoard {
 
 	if (board[row][col] == 0) {
 	    board[row][col] = level;
-	    int[][] moves = makePossibleMoves(row, col);
+	    updateBoardState();
+	    System.out.println(toString() + level + "\n");
 	    for (int[] ary : moves) {
-		if (isInBounds(ary[0], ary[1]) && solveH(ary[0], ary[1], level + 1)) {
+		int newRow = row + ary[0];
+		int newCol = col + ary[1];
+		if (isInBounds(newRow, newCol) && solveH(newRow, newCol, level + 1)) {
 		    return true;
 		}
 	    }
@@ -77,34 +88,24 @@ public class KnightBoard {
 	return (row >= 0 && col >= 0 && row < board.length && col < board[0].length);
     }
 
-    private int[][] makePossibleMoves (int row, int col) {
-	int[][] moves = { {row - 2, col + 1}, // up 2 right 1
-			  {row - 2, col - 1}, 
-			  {row + 2, col + 1}, 
-			  {row + 2, col - 1}, // down 2 left 1 
-			  {row - 1, col + 2},
-			  {row - 1, col - 2},
-			  {row + 1, col + 2}, 
-			  {row - 1, col - 2} };
-
-	return moves;
-    }
-
     public static void main (String[] args) {
 
-	int tick = 1;
+	KnightBoard dank = new KnightBoard(5, 5);
+	System.out.println(dank.toStringRun());
+
+	int tick = 0;
 	if (tick == 1) {
 	    int limit = 7;
 	    for (int count = 1; count < limit + 1; count++) {
 		KnightBoard board = new KnightBoard(count, count);
-		System.out.println(board.toStringRun(0));
+		System.out.println(board.toStringRun());
 	    }
 	}
 
 	int tock = 0;
 	if (tock == 1) {
 	    KnightBoard board = new KnightBoard(5, 5);
-	    System.out.println(board.toStringRun(0));
+	    System.out.println(board.toStringRun());
 	}
 
     }

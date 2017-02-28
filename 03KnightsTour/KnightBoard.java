@@ -51,7 +51,13 @@ public class KnightBoard {
 	if (numKnights == 1) {
 	    boardState = "1";
 	}  else { 
-	    solveH(0, 0, 1);
+	    if (solveH(0, 0, 1)) {
+		System.out.println("IS SOLVED");
+		updateBoardState();
+		reset();
+	    } else {
+		System.out.println("NOT SOLVED");
+	    }
 	}
     }
 
@@ -60,26 +66,28 @@ public class KnightBoard {
         //if (level < 2) System.out.println(this);
 	
 	if (level > numKnights) {
-	    System.out.println("IS SOLVED");
-	    updateBoardState();
-	    reset();
 	    return true;
 	}
 
 	if (board[row][col] == 0) {
 	    board[row][col] = level;
-	    updateBoardState();
-	    System.out.println(toString() + level + "\n");
-	    for (int[] ary : moves) {
-		int newRow = row + ary[0];
-		int newCol = col + ary[1];
+	    //System.out.println("Added " + level);
+	    //updateBoardState();
+	    //System.out.println(toString() + level + "\n");
+	    for (int count = 0; count < 8; count++) {
+		int newRow = row + moves[count][0];
+		int newCol = col + moves[count][1];
 		if (isInBounds(newRow, newCol) && solveH(newRow, newCol, level + 1)) {
 		    return true;
 		}
 	    }
+
+	    updateBoardState();
+	    System.out.println(toString() + level + '\n');
 	    board[row][col] = 0;
+	    //System.out.println("Removed " + level);
 	}
-	
+
 	return false;		
 
     }
@@ -90,9 +98,6 @@ public class KnightBoard {
 
     public static void main (String[] args) {
 
-	KnightBoard dank = new KnightBoard(5, 5);
-	System.out.println(dank.toStringRun());
-
 	int tick = 0;
 	if (tick == 1) {
 	    int limit = 7;
@@ -102,9 +107,9 @@ public class KnightBoard {
 	    }
 	}
 
-	int tock = 0;
+	int tock = 1;
 	if (tock == 1) {
-	    KnightBoard board = new KnightBoard(5, 5);
+	    KnightBoard board = new KnightBoard(4, 5);
 	    System.out.println(board.toStringRun());
 	}
 

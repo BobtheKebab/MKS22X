@@ -63,7 +63,7 @@ public class KnightBoard {
 
     private boolean solveH (int row, int col, int level) {
 
-        //if (level < 2) System.out.println(this);
+        //System.out.println(this);
 	
 	if (level > numKnights) {
 	    return true;
@@ -74,16 +74,16 @@ public class KnightBoard {
 	    //System.out.println("Added " + level);
 	    //updateBoardState();
 	    //System.out.println(toString() + level + "\n");
-	    for (int count = 0; count < 8; count++) {
-		int newRow = row + moves[count][0];
-		int newCol = col + moves[count][1];
+	    for (int[] ary : moves) {
+		int newRow = row + ary[0];
+		int newCol = col + ary[1];
 		if (isInBounds(newRow, newCol) && solveH(newRow, newCol, level + 1)) {
 		    return true;
 		}
 	    }
 
-	    updateBoardState();
-	    System.out.println(toString() + level + '\n');
+	    //updateBoardState();
+	    //System.out.println(toString() + level + '\n');
 	    board[row][col] = 0;
 	    //System.out.println("Removed " + level);
 	}

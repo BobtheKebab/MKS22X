@@ -3,14 +3,14 @@ public class KnightBoard {
     public int[][] board;
     private String boardState;
     private int numKnights;
-    private int[][] moves = { {-2, 1}, // up 2 right 1
-			      {-2, -1}, 
+    private int[][] moves = { {1, 2} , 
+			      {-2, -1},
+			      {-2, 1}, 
 			      {2, 1}, 
-			      {2, -1}, // down 2 left 1 
+			      {2, -1},
 			      {-1, 2},
 			      {-1, -2},
-			      {1, 2}, 
-			      {-1, -2} };
+			      {1, -2} };
     
     public KnightBoard (int rows, int cols) {
 	board = new int[rows][cols];
@@ -52,18 +52,17 @@ public class KnightBoard {
 	    boardState = "1";
 	}  else { 
 	    if (solveH(0, 0, 1)) {
-		System.out.println("IS SOLVED");
+		System.out.println("SOLVED");
 		updateBoardState();
 		reset();
 	    } else {
-		System.out.println("NOT SOLVED");
+		System.out.println("NO SOLUTION");
+		reset();
 	    }
 	}
     }
 
     private boolean solveH (int row, int col, int level) {
-
-        //System.out.println(this);
 	
 	if (level > numKnights) {
 	    return true;
@@ -71,9 +70,6 @@ public class KnightBoard {
 
 	if (board[row][col] == 0) {
 	    board[row][col] = level;
-	    //System.out.println("Added " + level);
-	    //updateBoardState();
-	    //System.out.println(toString() + level + "\n");
 	    for (int[] ary : moves) {
 		int newRow = row + ary[0];
 		int newCol = col + ary[1];
@@ -82,10 +78,7 @@ public class KnightBoard {
 		}
 	    }
 
-	    //updateBoardState();
-	    //System.out.println(toString() + level + '\n');
 	    board[row][col] = 0;
-	    //System.out.println("Removed " + level);
 	}
 
 	return false;		
@@ -109,7 +102,7 @@ public class KnightBoard {
 
 	int tock = 1;
 	if (tock == 1) {
-	    KnightBoard board = new KnightBoard(4, 5);
+	    KnightBoard board = new KnightBoard(4, 6);
 	    System.out.println(board.toStringRun());
 	}
 

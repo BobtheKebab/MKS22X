@@ -6,6 +6,10 @@ public class Maze {
     public char[][] maze;
     private boolean animate;
     private int[] startLoc = new int[2];
+    private int[][] moves = { {-1, 0},
+			      {0, 1},
+			      {1, 0},
+			      {0, -1} };
 
     public Maze (String fileName) {
 	animate = false;
@@ -51,10 +55,48 @@ public class Maze {
 	}
     }
 
+    public boolean solve () {
+	int row = startLoc[0], col = startLoc[1];
+	maze[row][col] = ' ';
+	return solveH(row, col);
+    }
+
+    public String toString () {
+	String str = "";
+	for (char[] ary : maze) {
+	    for (char chr : ary) {
+		str += chr;
+	    }
+	    str += "\n";
+	}
+	return str;
+    }
+
+    private boolean solveH (int row, int col) {
+	char chr = maze[row][col];
+	if (chr == '#' || chr == '.') {
+	    return false;
+	}
+	if (chr  == 'E') {
+	    return true;
+	}
+	
+	maze[row][col] = '.';
+	System.out.println(toString());
+
+	for (int[] ary : moves) {
+	    if (solveH(row + ary[0], col + ary[1])) {
+		return true;
+	    }
+	}
+
+	return false;
+    }
+
     public static void main (String[] args) {
 
-	Maze dank = new Maze("data1.dat");
-	//System.out.println(dank.maze[5][1]);
+	Maze dank = new Maze("data3.dat");
+	System.out.println(dank.solve());
 
     }
 	    

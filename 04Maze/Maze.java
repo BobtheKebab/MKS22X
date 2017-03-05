@@ -127,7 +127,6 @@ public class Maze {
 	}
 
 	maze[row][col] = '@';
-	System.out.println(toString());
 
 	for (int[] ary : moves) {
 	    if (solveH(row + ary[0], col + ary[1])) {
@@ -141,7 +140,7 @@ public class Maze {
 
     public static void main (String[] args) {
 
-	Maze dank = new Maze("data3.dat");
+	Maze dank = new Maze("data1.dat");
 	dank.setAnimate(true);
 	System.out.println(dank.solve());
 

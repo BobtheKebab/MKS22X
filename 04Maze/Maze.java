@@ -17,15 +17,22 @@ public class Maze {
 	    File data = new File(fileName);;
 	    fillMaze(data);
 	} catch (FileNotFoundException e) {
-	    System.out.println("Invalid file name/path");
+	    e = new FileNotFoundException("Invalid file name/path");
+	    System.out.println(e);
+	    System.exit(0);
+	} catch (Exception e) {
+	    System.out.println(e);
+	    System.exit(0);
 	}
     }
 
-    private void fillMaze (File data) throws FileNotFoundException {
+    private void fillMaze (File data) throws FileNotFoundException, Exception {
 
 	// Initialize maze
+	
 	Scanner skan = new Scanner(data);
 	int rows = 0, cols = 0, colCount = 0;
+	
 	while (skan.hasNextLine()) {
 	    rows++;
 	    if (colCount == 0) {
@@ -35,24 +42,39 @@ public class Maze {
 		skan.nextLine();
 	    }
 	}
-	//System.out.println(rows);
-	//System.out.println(cols);
 	maze = new char[rows][cols];
 
 	// Fill the maze
+	
+	boolean isE = false;
 	skan = new Scanner(data);
+	
 	for (int count = 0; count < maze.length; count++) {
 	    String text = skan.nextLine();
-	    //System.out.println(text);
 	    for (int num = 0; num < maze[0].length; num++) {
-		if (text.charAt(num) == 'S') {
+		char chr = text.charAt(num);
+		if (chr == 'S') {
 		    startLoc[0] = count;
 		    startLoc[1] = num;
 		}
-		
+		if (chr == 'E') {
+		    isE = true;
+		}
 		maze[count][num] = text.charAt(num);
 	    }
 	}
+
+	// Check if missing E or S
+
+	if (isE == false) {
+	    throw new Exception("Maze doesn't contain end point");
+	    //return;
+	}
+	if (startLoc[0] == 0) {
+	    throw new Exception("Maze doesn't contain start point");
+	    //return;
+	}
+	
     }
 
     public boolean solve () {
@@ -82,7 +104,7 @@ public class Maze {
 	}
 	
 	maze[row][col] = '.';
-	System.out.println(toString());
+	//System.out.println(toString());
 
 	for (int[] ary : moves) {
 	    if (solveH(row + ary[0], col + ary[1])) {
@@ -95,7 +117,7 @@ public class Maze {
 
     public static void main (String[] args) {
 
-	Maze dank = new Maze("data3.dat");
+	Maze dank = new Maze("data1.dat");
 	System.out.println(dank.solve());
 
     }

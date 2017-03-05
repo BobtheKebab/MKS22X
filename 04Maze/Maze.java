@@ -77,10 +77,20 @@ public class Maze {
 	
     }
 
-    public boolean solve () {
-	int row = startLoc[0], col = startLoc[1];
-	maze[row][col] = ' ';
-	return solveH(row, col);
+    private void wait (int time) {
+         try {
+             Thread.sleep(time);
+         }
+         catch (InterruptedException e) {
+         }
+    }
+
+    public void setAnimate (boolean bool) {
+	animate = bool;
+    }
+
+    public void clearTerminal (){
+	System.out.println("\033[2J\033[1;1H");
     }
 
     public String toString () {
@@ -94,17 +104,30 @@ public class Maze {
 	return str;
     }
 
+    public boolean solve () {
+	int row = startLoc[0], col = startLoc[1];
+	maze[row][col] = ' ';
+	return solveH(row, col);
+    }
+
     private boolean solveH (int row, int col) {
-	char chr = maze[row][col];
-	if (chr == '#' || chr == '.') {
-	    return false;
+
+	if (animate) {
+	    clearTerminal();
+	    System.out.println(toString());
+	    wait(60);
 	}
+	
+	char chr = maze[row][col];
 	if (chr  == 'E') {
 	    return true;
 	}
-	
-	maze[row][col] = '.';
-	//System.out.println(toString());
+	if (chr == '#' || chr == '.' || chr == '@') {
+	    return false;
+	}
+
+	maze[row][col] = '@';
+	System.out.println(toString());
 
 	for (int[] ary : moves) {
 	    if (solveH(row + ary[0], col + ary[1])) {
@@ -112,12 +135,14 @@ public class Maze {
 	    }
 	}
 
+	maze[row][col] = '.';
 	return false;
     }
 
     public static void main (String[] args) {
 
-	Maze dank = new Maze("data1.dat");
+	Maze dank = new Maze("data3.dat");
+	dank.setAnimate(true);
 	System.out.println(dank.solve());
 
     }

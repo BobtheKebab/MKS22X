@@ -85,11 +85,11 @@ public class Maze {
          }
     }
 
-    public void setAnimate (boolean bool) {
+    private void setAnimate (boolean bool) {
 	animate = bool;
     }
 
-    public void clearTerminal (){
+    private void clearTerminal (){
 	System.out.println("\033[2J\033[1;1H");
     }
 

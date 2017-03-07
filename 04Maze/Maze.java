@@ -46,7 +46,7 @@ public class Maze {
 
 	// Fill the maze
 	
-	boolean isE = false;
+	int numE = 0, numS = 0;
 	skan = new Scanner(data);
 	
 	for (int count = 0; count < maze.length; count++) {
@@ -54,11 +54,12 @@ public class Maze {
 	    for (int num = 0; num < maze[0].length; num++) {
 		char chr = text.charAt(num);
 		if (chr == 'S') {
+		    numS++;
 		    startLoc[0] = count;
 		    startLoc[1] = num;
 		}
 		if (chr == 'E') {
-		    isE = true;
+		    numE++;
 		}
 		maze[count][num] = text.charAt(num);
 	    }
@@ -66,12 +67,12 @@ public class Maze {
 
 	// Check if missing E or S
 
-	if (isE == false) {
-	    throw new Exception("Maze doesn't contain end point");
+	if (numE != 1) {
+	    throw new Exception("Maze doesn't contain proper number of end points");
 	    //return;
 	}
-	if (startLoc[0] == 0) {
-	    throw new Exception("Maze doesn't contain start point");
+	if (numS != 1) {
+	    throw new Exception("Maze doesn't contain proper number of start points");
 	    //return;
 	}
 	

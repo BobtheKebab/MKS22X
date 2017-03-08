@@ -1,0 +1,60 @@
+import java.util.*;
+import java.io.*;
+
+public class Lake {
+
+    public int R, C, E, N;
+    private int[][] lake;
+    public String[] orders;
+
+    public Lake (String fileName) {
+	try {
+	    File data = new File(fileName);
+	    getInfo(data);
+	} catch (Exception e) {
+	    //System.out.println("dank");
+	    System.exit(0);
+	}
+    }
+
+    private void getInfo (File data) throws FileNotFoundException {
+	
+	Scanner skan = new Scanner(data);
+	R = Integer.parseInt(skan.next());
+	C = Integer.parseInt(skan.next());
+	E = Integer.parseInt(skan.next());
+	N = Integer.parseInt(skan.next());
+	lake = new int[R][C];
+	for(int i = 0; i < R; i++){
+	     for (int count = 0; count < C; count++) {
+		lake[i][count] = Integer.parseInt(skan.next());
+	    }
+	}
+	//System.out.println(toString());
+	
+	orders = new String[N];
+	for (int count = 0; count < N; count++) {
+	    dostuff(skan.next(),skan.next(),skan.next());
+	}
+    }
+
+    public String toString () {
+	String str = "";
+	for (int[] ary : lake) {
+	    for (int num : ary) {
+		str += num + " ";
+	    }
+	    str += "\n";
+	}
+
+	return str;
+    }
+
+    public static void main (String[] args) {
+	
+	Lake dank = new Lake("input.txt");
+	
+	//System.out.println(Lake.R);
+
+    }
+}

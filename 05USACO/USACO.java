@@ -3,10 +3,6 @@ import java.io.*;
 
 public class USACO {
 
-    //public int R, C, E, N;
-    //private int[][] lake;
-    //public static int[][] orders;
-
     public USACO () {
 
     }
@@ -15,7 +11,6 @@ public class USACO {
 
 	int R, C, E, N, answer = 0;
 	int[][] lake, orders;
-	//int[][] squareCoord = { {0, 0}, {0, 1}, {0, 2}
 
 	try {
 

@@ -15,6 +15,7 @@ public class USACO {
 
 	int R, C, E, N, answer = 0;
 	int[][] lake, orders;
+	//int[][] squareCoord = { {0, 0}, {0, 1}, {0, 2}
 
 	try {
 
@@ -40,17 +41,65 @@ public class USACO {
 		}
 	    }
 
-	    System.out.println(toString(lake));
-	    System.out.println(toString(orders));
+	    // Stomp down the lake
 
-	    // Run calculations and return output
+	    for (int[] ary : orders) {
+		stomp(lake, ary[0] - 1, ary[1] - 1, ary[2]);
+	    }
 
+	    for(int i = 0; i < R; i++){
+		for (int count = 0; count < C; count++) {
+		    if (E - lake[i][count] > 0) {
+			lake[i][count] =  E - lake[i][count];
+		    } else {
+			lake[i][count] = 0;
+		    }
+		}
+	    }
+
+	    // Calculate the lake's volume (each square is 72 * 72 inches)
+
+	    for (int[] ary : lake) {
+		for (int num : ary) {
+		    answer += num;
+		}
+	    }
+
+	    answer *= 72 * 72;
+	    
 	} catch (FileNotFoundException e) {
 	    System.out.println(e);
 	    System.exit(0);
 	}
 
 	return answer;
+	
+    }
+
+    // Must give true row and col, not row + 1 or col + 1
+    private static void stomp(int[][] ary, int row, int col, int depth) {
+
+	// Find highest elevation
+	
+	int highest = 0;
+	for (int count = 0; count < 3; count++) {
+	    for (int num = 0; num < 3; num++) {
+		int i = ary[row + count][col + num];
+		if (i > highest) highest = i;
+	    }
+	}
+
+	// Commense stomping
+	
+	highest -= depth;
+	for (int count = 0; count < 3; count++) {
+	    for (int num = 0; num < 3; num++) {
+		if (ary[row + count][col + num] > highest) {
+		    ary[row + count][col + num] = highest;
+		    //System.out.println("changed");
+		}
+	    }
+	}
 	
     }
 

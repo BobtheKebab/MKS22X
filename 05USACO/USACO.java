@@ -7,7 +7,7 @@ public class USACO {
 
     }
 
-    public static int silver (String fileName) {
+    public static int bronze (String fileName) {
 
 	int R, C, E, N, answer = 0;
 	int[][] lake, orders;
@@ -98,6 +98,43 @@ public class USACO {
 	
     }
 
+    public static int silver (String fileName) {
+	
+	int N, M, T, R1, C1, R2, C2, answer = 0;
+	String[][] field;
+
+	try {
+
+	    // Get all info from input
+
+	    File data = new File(fileName);
+	    Scanner skan = new Scanner(data);
+	
+	    N = Integer.parseInt(skan.next());
+	    M = Integer.parseInt(skan.next());
+	    T = Integer.parseInt(skan.next());
+
+	    System.out.println(skan.next());
+	    /*
+	    field = new String[N][M];
+	    for(int num = 0; num < N; num++){
+		for (int count = 0; count < M; count++) {
+		    //System.out.println(skan.next());
+		    field[num][count] = skan.next();
+		}
+	    }
+	    //System.out.println(toString(field));
+	    */
+
+	} catch (FileNotFoundException e) {
+	    System.out.println(e);
+	    System.exit(0);
+	}
+
+	return answer;
+
+    }
+
     public static String toString (int[][] array) {
 	String str = "";
 	for (int[] ary : array) {
@@ -118,7 +155,8 @@ public class USACO {
 	
 	USACO dank = new USACO();
 	
-	System.out.println(USACO.silver("input1.txt"));
+	//System.out.println(USACO.bronze("testBronze.txt"));
+	System.out.println(USACO.silver("testSilver.txt"));
 
     }
 }

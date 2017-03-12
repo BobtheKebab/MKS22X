@@ -91,7 +91,6 @@ public class USACO {
 	    for (int num = 0; num < 3; num++) {
 		if (ary[row + count][col + num] > highest) {
 		    ary[row + count][col + num] = highest;
-		    //System.out.println("changed");
 		}
 	    }
 	}
@@ -101,7 +100,7 @@ public class USACO {
     public static int silver (String fileName) {
 	
 	int N, M, T, R1, C1, R2, C2, answer = 0;
-	String[][] field;
+	int[][] ary0, ary1;
 
 	try {
 
@@ -114,17 +113,44 @@ public class USACO {
 	    M = Integer.parseInt(skan.next());
 	    T = Integer.parseInt(skan.next());
 
-	    System.out.println(skan.next());
-	    /*
-	    field = new String[N][M];
-	    for(int num = 0; num < N; num++){
+	    ary0 = new int[N][M];
+	    ary1 = new int[N][M];
+	    for (int num = 0; num < N; num++) {
+		String str = skan.next();
 		for (int count = 0; count < M; count++) {
-		    //System.out.println(skan.next());
-		    field[num][count] = skan.next();
+		    if (str.charAt(count) == '*') {
+			ary0[num][count] = -1;
+			ary1[num][count] = -1;
+		    }
 		}
 	    }
-	    //System.out.println(toString(field));
-	    */
+
+	    R1 = Integer.parseInt(skan.next()) - 1;
+	    C1 = Integer.parseInt(skan.next()) - 1;
+	    R2 = Integer.parseInt(skan.next()) - 1;
+	    C2 = Integer.parseInt(skan.next()) - 1;
+
+	    // Run calculations and get answer
+
+	    ary0[R1][C1] = 1;
+	    int count = 1;
+	    boolean whichAry = true;
+	    while (count < T + 1) {
+		if (whichAry) {
+		    fillAdjacent(ary0, ary1);
+		} else {
+		    fillAdjacent(ary1, ary0);
+		}
+		whichAry = !whichAry;
+		count++;
+	    }
+
+	    if (ary0[R2][C2] != 0) {
+		answer = ary0[R2][C2];
+	    } else {
+		answer = ary1[R2][C2];
+	    }
+	    
 
 	} catch (FileNotFoundException e) {
 	    System.out.println(e);
@@ -135,11 +161,33 @@ public class USACO {
 
     }
 
+    // ary1 gets updated values
+    private static void fillAdjacent (int[][] ary0, int[][] ary1) {
+
+	int[][] moves = { {1, 0} , {-1, 0} , {0, 1} , {0, -1} };
+
+	for (int num = 0; num < ary0.length; num++) {
+	    for (int count = 0; count < ary0[0].length; count++) {
+		if (ary0[num][count] == 0) {
+		    ary1[num][count] = 0;
+		    for (int[] ary : moves) {
+			try {
+			    int adjNum = ary0[num + ary[0]][count + ary[1]];
+			    if (adjNum != -1) {
+				ary1[num][count] += adjNum;
+			    }
+			} catch (ArrayIndexOutOfBoundsException e) {}
+		    }
+		}
+	    }
+	}
+    }
+
     public static String toString (int[][] array) {
 	String str = "";
 	for (int[] ary : array) {
 	    for (int num : ary) {
-		if (num < 10) {
+		if (num < 10 && num > -1) {
 		    str += num + "  ";
 		} else {
 		    str += num + " ";

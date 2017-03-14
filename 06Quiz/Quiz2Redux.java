@@ -10,17 +10,23 @@ public class Quiz2Redux {
 
     private static void combinationsH (ArrayList<String> ary, String str, String strOG, int index) {
 	
-	if (ary.indexOf(str) != -1) {
+	//System.out.println(str);
+	//System.out.println(ary);
+	//System.out.println(index);
+
+	if (ary.contains(str) || index >= strOG.length()) {
+	    ary.add(str);
 	    return;
 	}
 
-	ary.add(str);
-	//System.out.println(index);
-	System.out.println(ary);
-	index++;
-	combinationsH(ary, str, strOG, index);
-	combinationsH(ary, str + strOG.charAt(index), strOG, index);
+	//System.out.println("Passed check");
 
+	ary.add(str);
+	combinationsH(ary, str, strOG, index + 1);
+	System.out.println("A");
+	System.out.println(ary);
+	combinationsH(ary, str + strOG.charAt(index), strOG, index + 1);
+	System.out.println("B");
     }
 
     public static void main (String[] args) {

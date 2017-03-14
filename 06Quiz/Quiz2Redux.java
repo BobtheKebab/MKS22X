@@ -5,6 +5,7 @@ public class Quiz2Redux {
     public static ArrayList<String> combinations (String str) {
 	ArrayList<String> ary = new ArrayList<String>();
 	combinationsH(ary, "", str, 0);
+	Collections.sort(ary);
 	return ary;
     }
 
@@ -14,8 +15,11 @@ public class Quiz2Redux {
 	//System.out.println(ary);
 	//System.out.println(index);
 
-	if (ary.contains(str) || index >= strOG.length()) {
-	    ary.add(str);
+	if (index >= strOG.length()) {
+	    if (!ary.contains(str)) {
+		ary.add(str);
+		System.out.println(str);
+	    }
 	    return;
 	}
 
@@ -23,10 +27,10 @@ public class Quiz2Redux {
 
 	ary.add(str);
 	combinationsH(ary, str, strOG, index + 1);
-	System.out.println("A");
-	System.out.println(ary);
+	//System.out.println("A");
+	//System.out.println(ary);
 	combinationsH(ary, str + strOG.charAt(index), strOG, index + 1);
-	System.out.println("B");
+	//System.out.println("B");
     }
 
     public static void main (String[] args) {

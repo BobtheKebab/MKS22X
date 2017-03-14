@@ -10,11 +10,8 @@ public class Quiz2Redux {
     }
 
     private static void combinationsH (ArrayList<String> ary, String str, String strOG, int index) {
-	
-	//System.out.println(str);
-	//System.out.println(ary);
-	//System.out.println(index);
 
+	// Adds strings that werent added during recursion, including the original
 	if (index >= strOG.length()) {
 	    if (!ary.contains(str)) {
 		ary.add(str);
@@ -22,15 +19,12 @@ public class Quiz2Redux {
 	    }
 	    return;
 	}
-
-	//System.out.println("Passed check");
-
-	ary.add(str);
+	
+	if (!ary.contains(str)) {	   
+	    ary.add(str);
+	}
 	combinationsH(ary, str, strOG, index + 1);
-	//System.out.println("A");
-	//System.out.println(ary);
 	combinationsH(ary, str + strOG.charAt(index), strOG, index + 1);
-	//System.out.println("B");
     }
 
     public static void main (String[] args) {

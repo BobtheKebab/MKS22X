@@ -25,13 +25,14 @@ public class Quick {
 		end--;
 		System.out.println(toString(ary));
 	    } else {
+		System.out.println("START++");
 		start++;
 	    }
 	}
 
 	System.out.println("FINAL PHASE");
-	System.out.println(ary[start]);
-	System.out.println(ary[end]);
+	System.out.println(start);
+	System.out.println(end);
 	if (pVal < ary[start]) {
 	    swap(ary, pivot, start);
 	    pivot = start;

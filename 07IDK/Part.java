@@ -17,13 +17,18 @@ public class Part {
 
         while (start < end) {
 	    if (ary[start] > pVal) {
+		//System.out.println(ary[start]);
+		//System.out.println(ary[end]);
 		swap(ary, start, end);
 		end--;
+		//System.out.println(toString(ary));
 	    } else {
 		start++;
 	    }
 	}
 
+	System.out.println(ary[start]);
+	System.out.println(ary[end]);
 	swap(ary, pivot, start + 1);
 	pivot = end;
 	System.out.println(toString(ary));
@@ -42,7 +47,7 @@ public class Part {
 	for (int num : ary) {
 	    str += num + " ";
 	}
-	return str;
+	return str + "\n";
     }
 
     public static void main (String[] args) {

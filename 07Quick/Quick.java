@@ -18,16 +18,18 @@ public class Quick {
 
         while (start < end) {
 	    if (ary[start] > pVal) {
-		//System.out.println(ary[start]);
-		//System.out.println(ary[end]);
+		System.out.println(start);
+		System.out.println(end);
+		System.out.println(toString(ary));
 		swap(ary, start, end);
 		end--;
-		//System.out.println(toString(ary));
+		System.out.println(toString(ary));
 	    } else {
 		start++;
 	    }
 	}
 
+	System.out.println("FINAL PHASE");
 	System.out.println(ary[start]);
 	System.out.println(ary[end]);
 	if (pVal < ary[start]) {

@@ -30,7 +30,7 @@ public class Quiz2Redux {
     public static void main (String[] args) {
 
 	Quiz2Redux dank = new Quiz2Redux();
-	System.out.println(dank.combinations("abc"));
+	System.out.println(dank.combinations("abcd"));
 
     }
 

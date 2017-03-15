@@ -8,7 +8,6 @@ public class Quick {
 	
 	Random rand = new Random();
 	int pivot = rand.nextInt(end - start) + start;
-	pivot = 0;
 	int pVal = ary[pivot];
 
 	//Move pivot to end of array
@@ -36,6 +35,9 @@ public class Quick {
 	if (pVal < ary[start]) {
 	    swap(ary, pivot, start);
 	    pivot = start;
+	} else {
+	    swap(ary, pivot, start + 1);
+	    pivot = start + 1;
 	}
 	System.out.println(toString(ary));
 	System.out.println(pVal);

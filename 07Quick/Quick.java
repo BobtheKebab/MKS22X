@@ -17,21 +17,13 @@ public class Quick {
 
         while (start < end) {
 	    if (ary[start] > pVal) {
-		System.out.println(start);
-		System.out.println(end);
-		System.out.println(toString(ary));
 		swap(ary, start, end);
 		end--;
-		System.out.println(toString(ary));
 	    } else {
-		System.out.println("START++");
 		start++;
 	    }
 	}
 
-	System.out.println("FINAL PHASE");
-	System.out.println(start);
-	System.out.println(end);
 	if (pVal < ary[start]) {
 	    swap(ary, pivot, start);
 	    pivot = start;
@@ -39,8 +31,7 @@ public class Quick {
 	    swap(ary, pivot, start + 1);
 	    pivot = start + 1;
 	}
-	System.out.println(toString(ary));
-	System.out.println(pVal);
+	
 	return pivot;
     }
 
@@ -51,11 +42,15 @@ public class Quick {
     }
 
     public static int quickselect(int[] ary, int k) {
-	int num = -1;
-	while (num != k) {
-	    num = part(ary, 0, ary.length - 1);
+	if (k < 0 || k >= ary.length) {
+	    return -1;
 	}
-
+	int num = -1, start = 0, end = ary.length - 1;
+	while (num != k) {
+	    num = part(ary, start, end);
+	    if (num < k) start = num;
+	    if (num > k) end = num;
+	}
 	return ary[k];
     }
 
@@ -70,7 +65,7 @@ public class Quick {
     public static void main (String[] args) {
 	Quick dank = new Quick();
 	int[] ary = {15, 10, 5, 20, 25};
-	System.out.println(dank.part(ary, 0, ary.length - 1));
+	System.out.println(dank.quickselect(ary, 4));
     }
 
 }

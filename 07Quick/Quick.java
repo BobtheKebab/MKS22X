@@ -8,7 +8,6 @@ public class Quick {
 	
 	Random rand = new Random();
 	int pivot = rand.nextInt(end - start) + start;
-	pivot = 0;
 	int pVal = ary[pivot];
 
 	//Move pivot to end of array
@@ -17,11 +16,11 @@ public class Quick {
 	end--;
 
         while (start < end) {
-	    if (ary[start] >= pVal) {
+	    if (ary[start] > pVal) {
 		swap(ary, start, end);
 		end--;
-	    } else {
-		start++;
+	    } else if (ary[start] == pVal) {
+		swap(ary, start + 1, 
 	    }
 	}
 
@@ -46,7 +45,7 @@ public class Quick {
 	ary[index1] = temp;
     }
 
-    public static int quickselect(int[] ary, int k) {
+    public static int quickselect (int[] ary, int k) {
 
 	// Check for invalid input
 	if (k < 0 || k >= ary.length) {
@@ -61,6 +60,18 @@ public class Quick {
 	}
 
 	return ary[k];
+    }
+
+    public static void quicksort (int[] ary) {
+	qSortH(ary, 0, ary.length - 1);
+    }
+
+    private static void qSortH (int[] ary, int start, int end) {
+	int pivot = part(ary, start, end);
+	if (start < end) {
+	    part(ary, start, pivot - 1);
+	    part(ary, pivot + 1, start);
+	}
     }
 
     public static String toString (int[] ary) {

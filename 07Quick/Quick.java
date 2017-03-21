@@ -6,8 +6,9 @@ public class Quick {
 
     public static int part (int[] ary, int start, int end) {
 	
+	int dup = start;
 	Random rand = new Random();
-	int pivot = rand.nextInt(end - start) + start;
+	int pivot = rand.nextInt(end - start + 1) + start;
 	int pVal = ary[pivot];
 
 	//Move pivot to end of array
@@ -15,27 +16,23 @@ public class Quick {
 	pivot = end;
 	end--;
 
-        while (start < end) {
-	    if (ary[start] > pVal) {
+        while (start <= end) {
+	    if (ary[start] == pVal) {
+	        start++;
+	    } else if (ary[start] < pVal) {
+		swap(ary, start, dup);
+		start++;
+		dup++;
+	    } else {
 		swap(ary, start, end);
 		end--;
-	    } else if (ary[start] == pVal) {
-		swap(ary, start + 1, 
 	    }
 	}
 
-	// Chooses pivot's final index
-	System.out.println(start);
-	if (pVal <= ary[start]) {
-	    swap(ary, pivot, start);
-	    pivot = start;
-	} else {
-	    swap(ary, pivot, start + 1);
-	    pivot = start + 1;
-	}
+	// Final swap for pivot, moves to end of duplicates
+        swap(ary, pivot, start);
+	pivot = start;
 	
-	System.out.println(toString(ary));
-	System.out.println(ary[pivot]);
 	return pivot;
     }
 
@@ -84,7 +81,7 @@ public class Quick {
 
     public static void main (String[] args) {
 	Quick dank = new Quick();
-	int[] ary = {5, 5, 5, 10, 5, 20, 25};
+	int[] ary = {10, 5, 20, 25};
 	System.out.println(dank.part(ary, 0, ary.length - 1));
 	//System.out.println(dank.quick(ary, 4));
     }

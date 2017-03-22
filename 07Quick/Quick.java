@@ -8,6 +8,8 @@ public class Quick {
 	
 	int dup = start;
 	Random rand = new Random();
+	int temp = (end - start + 1) + start;
+	System.out.println(temp);
 	int pivot = rand.nextInt(end - start + 1) + start;
 	int pVal = ary[pivot];
 
@@ -65,10 +67,15 @@ public class Quick {
 
     private static void qSortH (int[] ary, int start, int end) {
 	int pivot = part(ary, start, end);
+
+	//System.out.println(toString(ary));
+	//	System.out.println(start);
+	//	System.out.println(pivot);
+	
 	if (start < end) {
-	    part(ary, start, pivot - 1);
-	    part(ary, pivot + 1, start);
-	}
+	    qSortH(ary, start, pivot);
+	    qSortH(ary, pivot + 1, end);
+	} else return;
     }
 
     public static String toString (int[] ary) {
@@ -82,8 +89,10 @@ public class Quick {
     public static void main (String[] args) {
 	Quick dank = new Quick();
 	int[] ary = {10, 5, 20, 25};
-	System.out.println(dank.part(ary, 0, ary.length - 1));
-	//System.out.println(dank.quick(ary, 4));
+	//System.out.println(dank.part(ary, 0, ary.length - 1));
+        dank.quicksort(ary);
+	System.out.println(toString(ary));
+	
     }
 
 }

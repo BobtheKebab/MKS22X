@@ -66,7 +66,7 @@ public class Quick {
     private static void qSortH (int[] ary, int start, int end) {
 	if (start < end) {
 	    int pivot = part(ary, start, end);
-	    qSortH(ary, start, pivot);
+	    qSortH(ary, start, pivot - 1);
 	    qSortH(ary, pivot + 1, end);
 	} else return;
     }
@@ -81,7 +81,7 @@ public class Quick {
 
     public static void main (String[] args) {
 	Quick dank = new Quick();
-	int[] ary = {50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0, 0, 0, 0, 0};
+	int[] ary = {15, 10, 0, 0, 5, 10, 10, 10, 10, 10, 10, 10, 10, 5, 5, 5, 15, 25};
 	//System.out.println(dank.part(ary, 0, ary.length - 1));
         dank.quicksort(ary);
 	System.out.println(toString(ary));

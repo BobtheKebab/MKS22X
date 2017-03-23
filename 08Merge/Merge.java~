@@ -1,0 +1,32 @@
+public class Merge {
+
+    public Merge () {}
+
+    private static int[] merge (int[] ary, int[] ari) {
+	int[] answer = new int[ary.length + ari.length];
+	int ind1, ind2;
+	boolean bool;
+	
+	while (ind1 + ind2 < answer.length) {
+	    if (ary[ind1] < ary[ind2] || ind2 >= ari.length) {
+		answer[ind1 + ind2] = ary[ind1];
+		ind1++;
+	    } else {
+		answer[ind1 + ind2] = ari[ind2];
+		ind2++;
+	    }
+	}
+
+	return answer;
+    }
+
+    public static void main (String[] args) {
+
+	Merge dank = new Merge();
+	int[] a = {0, 7};
+	int[] b = {5, 10};
+	System.out.println(merge(a, b)[3]);
+	
+    }
+}
+

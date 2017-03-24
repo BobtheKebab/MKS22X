@@ -2,6 +2,8 @@ public class Merge {
 
     public Merge () {}
 
+    // Mandatory Tests: random big, random small, same value, sorted, reverse sorted
+
     private static int[] merge (int[] ary, int[] yar) {
 	int[] answer = new int[ary.length + yar.length];
 	int ind1 = 0, ind2 = 0;
@@ -33,6 +35,23 @@ public class Merge {
 	}
 
 	return answer;
+    }
+
+    private static int[] makeCopy (int[] ary, int start, int end) {
+	int answer = new int[end - start];
+	for (int count = 0; count < end - start; count++, start++) {
+	    answer[count] = ary[start];
+	}
+	return answer;
+    }
+
+    public static void mergesort (int[] ary) {
+	int half = (ary.length - 1) / 2;
+	int[] left = makeCopy(ary, half);
+	int[] right = makeCopy(half + 1, ary.length - 1);
+	mergesort(left);
+	mergesort(right);
+	ary = merge(left, right);
     }
 
     public static String toString (int[] ary) {

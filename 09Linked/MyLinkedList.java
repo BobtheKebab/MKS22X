@@ -37,16 +37,31 @@ public class MyLinkedList {
 	return true;
     }
 
+    public int size () {
+	return size;
+    }
+
     public String toString () {
 	int count = 0;
-	String ans = "";
+	String ans = "[ ";
 	LNode thisNode = start;
-	while (count < size) {
-	    ans += thisNode.value + " ";
+	while (count < size - 1) {
+	    ans += thisNode.value + ", ";
 	    thisNode = thisNode.next;
 	    count++;
 	}
+	ans += thisNode.value + "]";
 	return ans;
+    }
+
+    public int get (int index) {
+	int count = 0;
+	LNode thisNode = start;
+	while (count < index) {
+	    thisNode = thisNode.next;
+	    count++;
+	}
+	return thisNode.value;
     }
 
     public static void main (String[] args ) {
@@ -54,7 +69,7 @@ public class MyLinkedList {
 	MyLinkedList dank = new MyLinkedList();
         dank.add(10);
 	dank.add(5);
-	System.out.println(dank);
+	System.out.println(dank.get(1));
 
     }
 

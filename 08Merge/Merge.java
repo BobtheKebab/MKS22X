@@ -5,7 +5,7 @@ public class Merge {
     // Mandatory Tests: random big, random small, same value, sorted, reverse sorted
 
     private static int[] merge (int[] dest, int[] ary, int[] yar) {
-	dest = new int[ary.length + yar.length];
+	//dest = new int[ary.length + yar.length];
 	int ind1 = 0, ind2 = 0;
 	boolean bool = true;
 	    
@@ -33,12 +33,13 @@ public class Merge {
 	    }
 	}
 
+	//System.out.println(toString(dest));
 	return dest;
     }
 
     private static int[] makeCopy (int[] ary, int start, int end) {
 	int[] answer = new int[end - start];
-	for (int count = 0; count < end - start + 1; count++, start++) {
+	for (int count = 0; count < answer.length; count++, start++) {
 	    answer[count] = ary[start];
 	}
 	return answer;
@@ -52,10 +53,14 @@ public class Merge {
 	
 	int half = ary.length / 2;
 	int[] left = makeCopy(ary, 0, half);
+	//System.out.println(toString(left));
 	int[] right = makeCopy(ary, half, ary.length);
+	//System.out.println(toString(right));
 	mergesort(left);
 	mergesort(right);
-	merge(ary, left, right);
+	ary = merge(ary, left, right);
+	//System.out.println(toString(ary));
+	return;
     }
 
     public static String toString (int[] ary) {
@@ -74,7 +79,7 @@ public class Merge {
 	//int[] d = merge(d, a, b);
 	//System.out.println(toString(d));
 
-	int[] c = {5, 11, 6, 9};
+	int[] c = {13, 5, 11, 6, 9, 10, 11, 9};
 	mergesort(c);
 	System.out.println(toString(c));
     }

@@ -25,6 +25,19 @@ public class MyLinkedList {
     private LNode start, end;
     private int size;
 
+    public MyLinkedList () {
+	start = end = null;
+	size = 0;
+    }
+
+    public MyLinkedList (int[] ary) {
+        start = end = null;
+	size = 0;
+	for (int num : ary) {
+	    add(num);
+	}
+    }
+
     private LNode getNode (int index) {
 	int count = 0;
 	LNode thisNode = start;
@@ -49,15 +62,15 @@ public class MyLinkedList {
 
     public void add (int index, int val) {
 	if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
-	LNode node = new LNode(val);
+	LNode node;
 	if (index == 0) {
-	    node.next = start;
+	    node = new LNode(val, start);
 	    start = node;
 	} else {
 	    LNode thisNode = getNode(index - 1);
-	    LNode temp = thisNode.next;
+	    node = new LNode(val, thisNode.next);
 	    thisNode.next = node;
-	    node.next = temp;
+
 	}
 	size++;
     }
@@ -129,6 +142,10 @@ public class MyLinkedList {
         dank.add(1, 100);
 	System.out.println(dank);
 	dank.remove(1);
+	System.out.println(dank);
+	
+	int[] ary = {1, 2, 3, 4, 5};
+	dank = new MyLinkedList(ary);
 	System.out.println(dank);
 
     }

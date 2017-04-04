@@ -5,15 +5,16 @@ public class MyLinkedList {
     private class LNode {
 
 	private int value;
-	private LNode next;
+	private LNode prev, next;
 	
 	public LNode (int val) {
 	    value = val;
-	    next = null;
+	    next = prev = null;
 	}
 
-	public LNode (int val, LNode nxt) {
+	public LNode (int val, LNode prv, LNode nxt) {
 	    value = val;
+	    prev = prv;
 	    next = nxt;
 	}
 
@@ -64,13 +65,13 @@ public class MyLinkedList {
 	if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
 	LNode node;
 	if (index == 0) {
-	    node = new LNode(val, start);
+	    node = new LNode(val, null, start);
+	    start.prev = node;
 	    start = node;
 	} else {
-	    LNode thisNode = getNode(index - 1);
-	    node = new LNode(val, thisNode.next);
-	    thisNode.next = node;
-
+	    node = new LNode(val, getNode(index - 1), getNode(index + 1));
+	    node.prev.next = node;
+	    node.next.prev = node;
 	}
 	size++;
     }
@@ -94,17 +95,23 @@ public class MyLinkedList {
     }
 
     public String toString () {
-	int count = 0;
-	String ans = "[ ";
-	LNode thisNode = start;
-	while (count < size - 1) {
-	    ans += thisNode.value + ", ";
-	    thisNode = thisNode.next;
-	    count++;
+	if (size == 0) {
+	    return "[]";
+	} else {
+	    int count = 0;
+	    String ans = "[ ";
+	    LNode thisNode = start;
+	    while (count < size - 1) {
+		ans += thisNode.value + ", ";
+		thisNode = thisNode.next;
+		count++;
+	    }
+	    ans += thisNode.value + " ]";
+	    return ans;
 	}
-	ans += thisNode.value + " ]";
-	return ans;
     }
+
+    // debugging toString looks like (null) 1 (2) , (1) 2 (3) , (2) 3 (null)
 
     public int get (int index) {
 	if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
@@ -134,18 +141,22 @@ public class MyLinkedList {
     public static void main (String[] args ) {
 	
 	MyLinkedList dank = new MyLinkedList();
+
+	
         dank.add(10);
 	dank.add(5);
 	dank.add(11);
 	dank.add(1);
+	/*
 	System.out.println(dank);
         dank.add(1, 100);
 	System.out.println(dank);
 	dank.remove(1);
 	System.out.println(dank);
-	
-	int[] ary = {1, 2, 3, 4, 5};
-	dank = new MyLinkedList(ary);
+	*/
+
+	//int[] ary = {1, 2, 3, 4, 5};
+	//dank = new MyLinkedList(ary);
 	System.out.println(dank);
 
     }

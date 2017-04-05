@@ -18,6 +18,10 @@ public class MyLinkedList {
 	    next = nxt;
 	}
 
+	public String toString () {
+	    return "(" + prev.value + ")" + " " + value + " " + "(" + next.value + "), ";
+	}
+
     }
 
     
@@ -73,7 +77,7 @@ public class MyLinkedList {
 	    end.next = node;
 	    end = node;
 	} else {
-	    node = new LNode(val, getNode(index - 1), getNode(index + 1));
+	    node = new LNode(val, getNode(index - 1), getNode(index));
 	    node.prev.next = node;
 	    node.next.prev = node;
 	}
@@ -84,10 +88,11 @@ public class MyLinkedList {
 	if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
 	int val = get(index);
 	if (index == 0) {
-	    start = getNode(1);
 	    getNode(1).prev = null;
+	    start = getNode(1);
 	} else if (index == size - 1) {
 	    getNode(size - 2).next = null;
+	    end = getNode(size - 2);
 	} else {
 	    getNode(index - 1).next = getNode(index + 1);
 	    getNode(index + 1).prev = getNode(index - 1);
@@ -104,19 +109,27 @@ public class MyLinkedList {
 	if (size == 0) {
 	    return "[]";
 	} else {
-	    int count = 0;
 	    String ans = "[ ";
 	    LNode thisNode = start;
-	    while (count < size - 1) {
+	    for (int count = 0; count < size -1; count++) {
 		ans += thisNode.value + ", ";
 		thisNode = thisNode.next;
-		count++;
 	    }
 	    ans += thisNode.value + " ]";
 	    return ans;
 	}
     }
 
+    private String toStringDebug () {
+	String ans = "";
+	LNode thisNode = start;
+        for (int count = 0; count < size; count++) {
+	    ans += thisNode.toString();
+	    thisNode = thisNode.next;
+	}
+	return ans;
+    }
+	    
     // debugging toString looks like (null) 1 (2) , (1) 2 (3) , (2) 3 (null)
 
     public int get (int index) {
@@ -153,6 +166,7 @@ public class MyLinkedList {
 	dank.add(11);
 	dank.add(1);
 	dank.remove(3);
+	System.out.println(dank);
 	dank.add(3, 50);
 	/*
 	System.out.println(dank);

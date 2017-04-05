@@ -35,7 +35,7 @@ public class MyLinkedList {
 
     }
     
-    //Start of linkedList class
+    //Start of MyLinkedList class
     
     private LNode start, end;
     private int size;
@@ -134,17 +134,13 @@ public class MyLinkedList {
     public String toStringDebug () {
 	String ans = "[ ";
 	LNode thisNode = start;
-	System.out.println(this);
         for (int count = 0; count < size - 1; count++) {
-	    System.out.println(this);
 	    ans += thisNode.toString() + ", ";
 	    thisNode = thisNode.next;
 	}
 	ans += thisNode.toString() + " ]";
 	return ans;
     }
-	    
-    // debugging toString looks like (null) 1 (2) , (1) 2 (3) , (2) 3 (null)
 
     public int get (int index) {
 	if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
@@ -173,7 +169,6 @@ public class MyLinkedList {
     public static void main (String[] args ) {
 	
 	MyLinkedList dank = new MyLinkedList();
-
 	
         dank.add(10);
 	dank.add(5);
@@ -192,8 +187,8 @@ public class MyLinkedList {
 
 	//int[] ary = {1, 2, 3, 4, 5};
 	//dank = new MyLinkedList(ary);
-	System.out.println(dank.getNode(0));
-	System.out.println(dank.toStringDebug());
+	System.out.println(dank);
+	//System.out.println(dank.toStringDebug());
 
     }
 

@@ -19,11 +19,21 @@ public class MyLinkedList {
 	}
 
 	public String toString () {
-	    return "(" + prev.value + ")" + " " + value + " " + "(" + next.value + "), ";
+	    String prv, val, nxt;
+	    if (prev == null) {
+		prv = "null";
+	    } else {
+		prv = "" + prev.value;
+	    }
+	    if (next == null) {
+		nxt = "null";
+	    } else {
+		nxt = "" + next.value;
+	    }
+	    return "(" + prv + ")" + " " + value + " " + "(" + nxt + ")";
 	}
 
     }
-
     
     //Start of linkedList class
     
@@ -59,6 +69,7 @@ public class MyLinkedList {
 	    start = end = node;
 	} else {
 	    end.next = node;
+	    node.prev = end;
 	    end = node;
 	}
 	size++;
@@ -111,7 +122,7 @@ public class MyLinkedList {
 	} else {
 	    String ans = "[ ";
 	    LNode thisNode = start;
-	    for (int count = 0; count < size -1; count++) {
+	    for (int count = 0; count < size - 1; count++) {
 		ans += thisNode.value + ", ";
 		thisNode = thisNode.next;
 	    }
@@ -120,13 +131,16 @@ public class MyLinkedList {
 	}
     }
 
-    private String toStringDebug () {
-	String ans = "";
+    public String toStringDebug () {
+	String ans = "[ ";
 	LNode thisNode = start;
-        for (int count = 0; count < size; count++) {
-	    ans += thisNode.toString();
+	System.out.println(this);
+        for (int count = 0; count < size - 1; count++) {
+	    System.out.println(this);
+	    ans += thisNode.toString() + ", ";
 	    thisNode = thisNode.next;
 	}
+	ans += thisNode.toString() + " ]";
 	return ans;
     }
 	    
@@ -166,7 +180,7 @@ public class MyLinkedList {
 	dank.add(11);
 	dank.add(1);
 	dank.remove(3);
-	System.out.println(dank);
+	//System.out.println(dank);
 	dank.add(3, 50);
 	/*
 	System.out.println(dank);
@@ -178,7 +192,8 @@ public class MyLinkedList {
 
 	//int[] ary = {1, 2, 3, 4, 5};
 	//dank = new MyLinkedList(ary);
-	System.out.println(dank);
+	System.out.println(dank.getNode(0));
+	System.out.println(dank.toStringDebug());
 
     }
 

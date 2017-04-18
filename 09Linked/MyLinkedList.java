@@ -227,8 +227,8 @@ public class MyLinkedList implements Iterable<Integer> {
 
 	//int[] ary = {1, 2, 3, 4, 5};
 	//dank = new MyLinkedList(ary);
-	System.out.println(dank);
-	//System.out.println(dank.toStringDebug());
+	System.out.println(dank.remove(0));
+	System.out.println(dank.toStringDebug());
 
     }
 

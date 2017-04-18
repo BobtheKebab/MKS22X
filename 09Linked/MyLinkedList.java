@@ -55,9 +55,8 @@ public class MyLinkedList implements Iterable<Integer> {
 
 	public Integer next () {
 	    if (hasNext()) {
-		int num = list.get(index);
-		index++;
-		return num;
+	        index++;
+		return list.get(index - 1);
 	    } else {
 		throw new NoSuchElementException();
 	    }
@@ -100,7 +99,8 @@ public class MyLinkedList implements Iterable<Integer> {
 	}
 	return thisNode;
     }
-
+    
+    // Adds to end
     public boolean add (int val) {
 	LNode node = new LNode(val);
 	if (size == 0) {
@@ -114,6 +114,7 @@ public class MyLinkedList implements Iterable<Integer> {
 	return true;
     }
 
+    // Adds to anywhere
     public void add (int index, int val) {
 	if (index < 0 || index >= size + 1) throw new IndexOutOfBoundsException();
 	LNode node;
@@ -169,6 +170,7 @@ public class MyLinkedList implements Iterable<Integer> {
 	}
     }
 
+    // Shows prev and next values
     public String toStringDebug () {
 	String ans = "[ ";
 	LNode thisNode = start;

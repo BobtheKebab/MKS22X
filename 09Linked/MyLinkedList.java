@@ -1,4 +1,6 @@
-public class MyLinkedList {
+import java.util.*;
+
+public class MyLinkedList implements Iterable<Integer> {
 
     // Node inner class
 
@@ -34,8 +36,40 @@ public class MyLinkedList {
 	}
 
     }
+
+    // Iterator inner class
+
+    private class MyIterator implements Iterator<Integer> {
+
+	private int index;
+	private MyLinkedList list;
+
+	public MyIterator (MyLinkedList lyst) {
+	    list = lyst;
+	    index = 0;
+	}
+
+	public boolean hasNext () {
+	    return index < list.size;
+	}
+
+	public Integer next () {
+	    if (hasNext()) {
+		int num = list.get(index);
+		index++;
+		return num;
+	    } else {
+		throw new NoSuchElementException();
+	    }
+	}
+
+	public void remove () {
+	    throw new UnsupportedOperationException();
+	}
+	
+    }
     
-    //Start of MyLinkedList class
+    // Start of MyLinkedList class
     
     private LNode start, end;
     private int size;
@@ -51,6 +85,10 @@ public class MyLinkedList {
 	for (int num : ary) {
 	    add(num);
 	}
+    }
+
+    public Iterator<Integer> iterator () {
+	return new MyIterator(this);
     }
 
     private LNode getNode (int index) {

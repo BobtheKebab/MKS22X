@@ -41,22 +41,20 @@ public class MyLinkedList implements Iterable<Integer> {
 
     private class MyIterator implements Iterator<Integer> {
 
-	private int index;
 	private MyLinkedList list;
 
 	public MyIterator (MyLinkedList lyst) {
 	    list = lyst;
-	    index = 0;
 	}
 
 	public boolean hasNext () {
-	    return index < list.size;
+	    return list.size > 0;
 	}
 
 	public Integer next () {
 	    if (hasNext()) {
-	        index++;
-		return list.get(index - 1);
+		int temp = list.remove(0);
+		return temp;
 	    } else {
 		throw new NoSuchElementException();
 	    }
@@ -229,6 +227,10 @@ public class MyLinkedList implements Iterable<Integer> {
 	//dank = new MyLinkedList(ary);
 	System.out.println(dank.remove(0));
 	System.out.println(dank.toStringDebug());
+
+	for (int num : dank) {
+	    System.out.println(num);
+	}
 
     }
 

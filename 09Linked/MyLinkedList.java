@@ -132,10 +132,12 @@ public class MyLinkedList implements Iterable<Integer> {
 	size++;
     }
 
-    //public int remove (int index) {    fix remove for single element edge case
+    public int remove (int index) {
 	if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
 	int val = get(index);
-	if (index == 0) {
+	if (size == 1) {
+	    start = end = null;
+	} else if (index == 0) {
 	    getNode(1).prev = null;
 	    start = getNode(1);
 	} else if (index == size - 1) {

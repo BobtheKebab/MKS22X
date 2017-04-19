@@ -132,7 +132,7 @@ public class MyLinkedList implements Iterable<Integer> {
 	size++;
     }
 
-    public int remove (int index) {
+    //public int remove (int index) {    fix remove for single element edge case
 	if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
 	int val = get(index);
 	if (index == 0) {

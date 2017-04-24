@@ -1,4 +1,4 @@
-import java.util.LinkedList;
+import java.util.*;
 
 public class MyDeque {
 
@@ -10,7 +10,20 @@ public class MyDeque {
 	list = new LinkedList<String>();
     }
 
+    private void checkSize () {
+	if (size == 0) {
+	    throw new NoSuchElementException();
+	}
+    }
+
+    private void checkNull (Object obj) {
+	if (obj == null) {
+	    throw new NullPointerException();
+	}
+    }
+
     public void addFirst (String str) {
+	checkNull(str);
 	list.add(front, str);
         back++;
 	size++;
@@ -18,6 +31,7 @@ public class MyDeque {
     }
 
     public void addLast (String str) {
+	checkNull(str);
 	list.add(str);
 	back++;
 	size++;
@@ -25,21 +39,25 @@ public class MyDeque {
     }
 
     public String removeFirst () {
+	checkSize();
 	String first = getFirst();
 	return first;
     }
 
     public String removeLast () {
+	checkSize();
 	String last = getLast();
 	return last;
     }
 
     public String getFirst () {
+	checkSize();
 	//System.out.println(front);
 	return list.get(front);
     }
 
     public String getLast () {
+	checkSize();
 	//System.out.println(back);
 	return list.get(back);
     }

@@ -7,6 +7,7 @@ public class MyDeque {
 
     public MyDeque () {
 	list = new String[10];
+	back = 9;
     }
 
     private void checkSize () {
@@ -20,16 +21,17 @@ public class MyDeque {
     private void doubleSize () {
 	String[] temp = new String[2 * list.length];
 	int index = 0;
-	// Fill in all elements after and including the front
+	// Adds all elements after and including front
 	for (int count = front; count < list.length; index++, count++) {
 	    temp[index] = list[count];
 	}
-	// If the back is before front, it adds the rest of the elements
-	if (back != list.length) {
+	// If back is before front, adds all remaining elements
+	if (back != list.length - 1) {
 	    for (int count = 0; count <= back; index++, count++) {
 		temp[index] = list[count];
 	    }
 	}
+	list = temp;
     }
 
     private void checkNull (Object obj) {
@@ -40,22 +42,18 @@ public class MyDeque {
 
     public void addFirst (String str) {
 	checkNull(str);
-	front--;
-	
-	list[front % list.length] = str;
-	System.out.println("k");
+	front = ((((front - 1) % list.length) + list.length) % list.length);
+	list[front] = str;
 	size++;
 	checkSize();
-	//System.out.println("" + front + " " +  back + " " +  size);
     }
 
     public void addLast (String str) {
 	checkNull(str);
-	back++;
-	list[back % list.length] = str;
+	back = ((((back + 1) % list.length) + list.length) % list.length);
+	list[back] = str;
 	size++;
 	checkSize();
-	//System.out.println("" + front + " " + back + " " +  size);
     }
 
     public String removeFirst () {
@@ -74,22 +72,24 @@ public class MyDeque {
 
     public String getFirst () {
 	checkSize();
-	//System.out.println(front);
 	return list[front];
     }
 
     public String getLast () {
 	checkSize();
-	//System.out.println(back);
 	return list[back];
     }
     
     public static void main (String[] args) {
 	
 	MyDeque dank = new MyDeque();
+	for (int count = 0; count < 15; count++) {
+	    dank.addFirst("hola");
+	}
 	dank.addFirst("hello");
-	System.out.println("added hello");
-	dank.addFirst("world");
+	dank.addLast("world");
+	//dank.removeFirst();
+	//dank.removeLast();
 	System.out.println(dank.getFirst());
 	System.out.println(dank.getLast());
 	

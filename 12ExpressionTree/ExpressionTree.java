@@ -42,9 +42,6 @@ public class ExpressionTree {
 	return left != null && right != null;
     }
 
-
-    // Functions to be written
-
     public double evaluate(){
 	if (isValue()) {
 	    return getValue();
@@ -53,24 +50,35 @@ public class ExpressionTree {
 			     getLeft().evaluate() - getRight().evaluate(), 
 			     getLeft().evaluate() * getRight().evaluate(), 
 			     getLeft().evaluate() / getRight().evaluate() };
-	    return ary[operations.indexOf((String) getOp())];
+	    return ary[operations.indexOf(Character.toString( getOp()))];
 	}
     }
   
     // The sample tree would be: "( 3 + (2 * 10))"
     public String toString(){
-	return "";
+	if (isValue()) {
+	    return "" + getValue();
+	} else {
+	    return "(" + getLeft().toString() + " " + getOp() + " " + getRight().toString() + ")";
+	}
     }
   
     // The sample tree would be: "3 2 10 * +"
     public String toStringPostfix(){
-	return "";
+	if (isValue()) {
+	    return "" + getValue();
+	} else {
+	    return getLeft().toStringPostfix() + " " + getRight().toStringPostfix() + " " + getOp();
+	}
     }
   
     // The sample tree would be: "+ 3 * 2 10"
-  
     public String toStringPrefix(){
-	return "";
+	if (isValue()) {
+	    return "" + getValue();
+	} else {
+	    return getOp() + " " + getLeft().toStringPrefix() + " " + getRight().toStringPrefix();
+	}
     }
 
 

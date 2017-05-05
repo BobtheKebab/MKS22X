@@ -37,20 +37,19 @@ public class MyHeap {
     }
 
     public String toString () {
-        heap.remove(0);
+        //heap.remove(0);
 	String str = heap.toString();
-	heap.add(0, "dank");
+	//heap.add(0, "dank");
 	return str;
     }
 
     private void pushUp (int index) {
-	if (size == 1) return;
-	int parentIndex = (int) Math.ceil((index - 1) / 2);
-	if (compare(index, parentIndex) > 0) {
+	//if (size == 1) return;
+	if (compare(index, index / 2) > 0 || index == 1) {
 	    return;
 	} else {
-	    swap(index, parentIndex);
-	    pushUp(parentIndex);
+	    swap(index, index / 2);
+	    pushUp(index / 2);
 	}
     }
 

@@ -47,7 +47,8 @@ public class ExpressionTree {
 	    return getValue();
 	} else {
 	    double[] ary = { getLeft().evaluate() + getRight().evaluate(),
-			     getLeft().evaluate() - getRight().evaluate(), 
+			     getLeft().evaluate() - getRight().evaluate(),     // Functions to be written
+
 			     getLeft().evaluate() * getRight().evaluate(), 
 			     getLeft().evaluate() / getRight().evaluate() };
 	    return ary[operations.indexOf(Character.toString( getOp()))];

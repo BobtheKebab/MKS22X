@@ -37,14 +37,13 @@ public class MyHeap {
     }
 
     public String toString () {
-        //heap.remove(0);
+        heap.remove(0);
 	String str = heap.toString();
-	//heap.add(0, "dank");
+	heap.add(0, "dank");
 	return str;
     }
 
     private void pushUp (int index) {
-	//if (size == 1) return;
 	if (compare(index, index / 2) > 0 || index == 1) {
 	    return;
 	} else {
@@ -54,7 +53,12 @@ public class MyHeap {
     }
 
     private void pushDown (int index) {
-	
+	if (compare(index, index * 2) < 0 || index == size) {
+	    return;
+	} else {
+	    swap(index, index * 2);
+	    pushDown(index * 2);
+	}
     }
 
     private int compare (int index1, int index2) {
@@ -74,6 +78,7 @@ public class MyHeap {
 	MyHeap dank = new MyHeap();
 	dank.add("z");
 	dank.add("a");
+	dank.remove();
 	System.out.println(dank);
 
     }

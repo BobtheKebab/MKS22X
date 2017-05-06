@@ -4,18 +4,15 @@ public class MyHeap {
 
     private ArrayList<String> heap = new ArrayList<String>();
     private int constant = 1, size = 0;
-    private boolean isMax;
 
     // Initialized as max-heap
     public MyHeap () {
-	isMax = true;
         heap.add("dank");
     }
 
     // True for max-heap, false for min-heap
     public MyHeap (boolean bool) {
-	isMax = bool;
-	if (!isMax) {
+	if (!bool) {
 	    constant = -1;
 	}
 	heap.add("dank");
@@ -80,7 +77,7 @@ public class MyHeap {
 
     public static void main (String[] args) {
 
-	MyHeap dank = new MyHeap(false);
+	MyHeap dank = new MyHeap();
 	dank.add("y");
 	dank.add("x");
 	dank.add("z");

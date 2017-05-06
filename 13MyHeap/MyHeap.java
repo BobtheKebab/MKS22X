@@ -46,47 +46,23 @@ public class MyHeap {
 	return str;
     }
 
-    /*
     private void pushUp () {
-	int index = size;
-	if (isMax) {
-	    while (compare(index, index / 2) < 0 && index > 1) {
+	for (int index = size; index > 1; index /= 2) {
+	    if (compare(index, index / 2) < 0) {
 		swap(index, index / 2);
-		index /= 2;
-	    }
-	} else {
-	    while (compare(index, index / 2) > 0 && index > 1) {
-		swap(index, index / 2);
-		index /= 2;
+	    } else if (compare(index, index / 2 + 1) < 0) {
+		swap(index, index / 2 + 1);
 	    }
 	}
     }
 
     private void pushDown () {
-	int index = 1;
-	if (isMax) {
-	    while (compare(index, index * 2) > 0 && index < size) {
+	for (int index = 1; index < size / 2; index *= 2) {
+	    if (compare(index, index * 2) > 0) {
 		swap(index, index * 2);
-		index *= 2;
+	    } else if (compare(index, index * 2 + 1) > 0) {
+		swap(index, index * 2 + 1);
 	    }
-	} else {
-	    while (compare(index, index * 2) < 0 && index < size) {
-		swap(index, index * 2);
-		index *= 2;
-	    }
-	}
-    }
-    */
-
-    private void pushUp () {
-	for (int index = size; index > 1 && compare(index, index / 2) < 0; index /= 2) {
-	    swap(index, index / 2);
-	}
-    }
-
-    private void pushDown () {
-	for (int index = 1; index < size /2 && compare(index, index * 2) > 0; index *= 2) {
-	    swap(index, index * 2);
 	}
     }
 

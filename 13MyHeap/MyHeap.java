@@ -20,14 +20,14 @@ public class MyHeap {
     public void add (String str) {
 	size++;
 	heap.add(str);
-	pushUp(size);
+	pushUp();
     }
 
     public String remove () {
 	String ans = heap.get(1);
 	heap.set(1, heap.get(size));
 	heap.remove(size);
-	pushDown(1);
+	pushDown();
 	size--;
 	return ans;
     }
@@ -43,21 +43,15 @@ public class MyHeap {
 	return str;
     }
 
-    private void pushUp (int index) {
-	if (compare(index, index / 2) > 0 || index == 1) {
-	    return;
-	} else {
+    private void pushUp () {
+	for (int index = size; compare(index, index / 2) < 0 && index != 1; index /= 2) {
 	    swap(index, index / 2);
-	    pushUp(index / 2);
 	}
     }
 
-    private void pushDown (int index) {
-	if (compare(index, index * 2) < 0 || index == size) {
-	    return;
-	} else {
+    private void pushDown () {
+	for (int index = 1; compare(index, index * 2) > 0 && index != size; index *= 2) {
 	    swap(index, index * 2);
-	    pushDown(index * 2);
 	}
     }
 
@@ -75,9 +69,15 @@ public class MyHeap {
 
     public static void main (String[] args) {
 
-	MyHeap dank = new MyHeap();
+	MyHeap dank = new MyHeap(false);
 	dank.add("z");
+	dank.add("x");
+	System.out.println(dank);
+	dank.add("b");
+	dank.remove();
+	System.out.println(dank);
 	dank.add("a");
+	System.out.println(dank);
 	dank.remove();
 	System.out.println(dank);
 

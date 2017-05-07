@@ -34,7 +34,11 @@ public class DoubleHeap {
     }
 
     public Double peek () {
-        return heap.get(1);
+	if (size == 0) {
+	    return 0.0;
+	} else {
+	    return heap.get(1);
+	}
     }
 
     public String toString () {
@@ -42,6 +46,10 @@ public class DoubleHeap {
 	String str = heap.toString();
 	heap.add(0, 69.0);
 	return str;
+    }
+
+    public int getSize () {
+	return size;
     }
 
     private void pushUp () {

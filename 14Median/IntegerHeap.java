@@ -25,7 +25,7 @@ public class IntegerHeap {
 	pushUp();
     }
 
-    public Integer remove () {
+    public int remove () {
 	Integer ans = heap.get(1);
 	heap.set(1, heap.remove(size));
 	pushDown();
@@ -33,7 +33,7 @@ public class IntegerHeap {
 	return ans;
     }
 
-    public Integer peek () {
+    public int peek () {
 	if (size == 0) {
 	    return 0;
 	} else {
@@ -72,7 +72,7 @@ public class IntegerHeap {
 	}
     }
 
-    private double compare (int index1, int index2) {
+    private int compare (int index1, int index2) {
 	Integer num1 = heap.get(index1);
 	Integer num2 = heap.get(index2);
 	return num1.compareTo(num2) * constant;

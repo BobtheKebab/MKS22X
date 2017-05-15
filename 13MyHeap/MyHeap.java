@@ -82,13 +82,19 @@ public class MyHeap {
 	dank.add("x");
 	dank.add("z");
 	System.out.println(dank);
+	dank.add("z");
+	System.out.println(dank);
+	dank.add("z");
+	System.out.println(dank);
+	dank.remove();
+	System.out.println(dank);
+	dank.remove();
+	System.out.println(dank);
+	dank.add("c");
+	System.out.println(dank);
 	dank.add("b");
 	System.out.println(dank);
 	dank.add("a");
-	System.out.println(dank);
-	dank.remove();
-	System.out.println(dank);
-	dank.remove();
 	System.out.println(dank);
 
     }

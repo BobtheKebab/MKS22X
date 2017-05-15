@@ -82,9 +82,10 @@ public class Quick {
     public static void main (String[] args) {
 	Quick dank = new Quick();
 	int[] ary = {15, 10, 0, 0, 5, 10, 10, 10, 10, 10, 10, 10, 10, 5, 5, 5, 15, 25};
+	int[] dk = {};
 	//System.out.println(dank.part(ary, 0, ary.length - 1));
-        dank.quicksort(ary);
-	System.out.println(toString(ary));
+        dank.quicksort(dk);
+	System.out.println(toString(dk));
 	
     }
 

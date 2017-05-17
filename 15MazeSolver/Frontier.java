@@ -14,11 +14,12 @@ public class StackFrontier implements Frontier {
     private Stack<Location> locations;
 
     public void add (Location loc) {
-
+	locations.push(loc);
     }
 
     public Location next () {
 	// remove top and return it
+	return locations.pop();
     }
 
 }
@@ -26,14 +27,15 @@ public class StackFrontier implements Frontier {
 // Breadth First
 public class QueueFrontier {
 
-    private Queue<Location> locations;
+    private ArrayDeque<Location> locations;
 
     public void add (Location loc) {
-
+	locations.add(loc);
     }
 
     public Location next () {
 	// remove top and return it
+	return locations.remove();
     }
 
 }

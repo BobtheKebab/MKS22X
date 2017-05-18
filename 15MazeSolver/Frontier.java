@@ -18,7 +18,6 @@ public class StackFrontier implements Frontier {
     }
 
     public Location next () {
-	// remove top and return it
 	return locations.pop();
     }
 
@@ -34,7 +33,6 @@ public class QueueFrontier {
     }
 
     public Location next () {
-	// remove top and return it
 	return locations.remove();
     }
 
@@ -46,7 +44,7 @@ public class PQFrontier {
     private MyPQ locations;
 
     public void add (Location loc) {
-
+	locations.add(loc);
     }
 
     public Location next () {

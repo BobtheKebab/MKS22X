@@ -6,12 +6,12 @@ public class MyPQ {
     private int constant = 1, size = 0;
 
     // Initialized as max-heap
-    public MyHeap () {
+    public MyPQ () {
         heap.add(null);
     }
 
     // True for max-heap, false for min-heap
-    public MyHeap (boolean bool) {
+    public MyPQ (boolean bool) {
 	if (!bool) {
 	    constant = -1;
 	}
@@ -24,22 +24,22 @@ public class MyPQ {
 	pushUp();
     }
 
-    public String remove () {
-	String ans = heap.get(1);
+    public Location remove () {
+	Location ans = heap.get(1);
 	heap.set(1, heap.remove(size));
 	pushDown();
 	size--;
 	return ans;
     }
 
-    public String peek () {
+    public Location peek () {
         return heap.get(1);
     }
 
     public String toString () {
         heap.remove(0);
 	String str = heap.toString();
-	heap.add(0, "dank");
+	heap.add(0, null);
 	return str;
     }
 
@@ -64,38 +64,20 @@ public class MyPQ {
     }
 
     private int compare (int index1, int index2) {
-	String str1 = heap.get(index1);
-	String str2 = heap.get(index2);
-	return str1.compareTo(str2) * constant;
+	Location loc1 = heap.get(index1);
+	Location loc2 = heap.get(index2);
+	return loc1.compareTo(loc2) * constant;
     }
 
     private void swap (int index1, int index2) {
-	String temp = heap.get(index2);
+	Location temp = heap.get(index2);
 	heap.set(index2, heap.get(index1));
 	heap.set(index1, temp);
     }
 
     public static void main (String[] args) {
 
-	MyHeap dank = new MyHeap();
-	dank.add("y");
-	dank.add("x");
-	dank.add("z");
-	System.out.println(dank);
-	dank.add("z");
-	System.out.println(dank);
-	dank.add("z");
-	System.out.println(dank);
-	dank.remove();
-	System.out.println(dank);
-	dank.remove();
-	System.out.println(dank);
-	dank.add("c");
-	System.out.println(dank);
-	dank.add("b");
-	System.out.println(dank);
-	dank.add("a");
-	System.out.println(dank);
+	MyPQ dank = new MyPQ();
 
     }
 

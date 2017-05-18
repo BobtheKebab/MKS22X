@@ -50,7 +50,7 @@ public class PQFrontier {
     }
 
     public Location next () {
-	
+	return locations.remove();
     }
 
 }

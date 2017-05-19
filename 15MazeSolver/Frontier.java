@@ -43,6 +43,10 @@ public class PQFrontier {
 
     private MyPQ locations;
 
+    public PQFrontier (boolean bool) {
+	locations = new MyPQ(bool);
+    }
+
     public void add (Location loc) {
 	locations.add(loc);
     }

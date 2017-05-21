@@ -10,12 +10,12 @@ public class MazeSolver {
 					 {1, 0},    // Up
 					 {-1, 0} }; // Down
     
-    public MazeSolver (Maze mzzz) {
-	maze = mzzz;
+    public MazeSolver (String fileName) {
+	this(fileName, false);
     }
 
-    public MazeSolver (Maze mzzz, boolean ani) {
-	maze = mzzz;
+    public MazeSolver (String fileName, boolean ani) {
+	maze = new Maze(fileName);
 	animate = ani;
     }
 
@@ -24,15 +24,36 @@ public class MazeSolver {
     }
 
     public void solve (int style) {
+	
 	switch (style) {
 	case 0 : frontier = new StackFrontier();   // Depth
 	case 1 : frontier = new QueueFrontier();   // Breadth
-	case 2 : frontier = new PQFrontier();      // Best
+	case 2 : frontier = new PQFrontier(true);  // Best
 	case 3 : frontier = new PQFrontier(false); // A*
 	}
 
 	frontier.add(maze.getStart());
+	
 	while (frontier.hasNext()) {
+
+	    Location loc = frontier.next();
+	    maze.set(loc.getRow(), loc.getCol(), '.');
+	    
+	    if (getDist(loc, maze.getEnd()) == 0) {
+		maze.set(loc.getRow(), loc.getCol(), 'E');
+		traceBack(loc);
+		System.out.println(this);
+		System.out.println("GOT SOLUTION");
+		return;
+	    }
+	    
+	    ArrayList<Location> adjLocations = getAdjacent(loc);
+	    for (Location element : adjLocations) {
+		maze.set(element.getRow(), element.getCol(), '?');
+		frontier.add(element);
+	    }
+	    
+	    System.out.println(this.toString());
 	    
 	}
 	
@@ -51,6 +72,14 @@ public class MazeSolver {
 	return loc;
     }
 
+    private void traceBack (Location loc) {
+	while (loc.getPrev() != maze.getStart()) {
+	    maze.set(loc.getPrev().getRow(), loc.getPrev().getCol(), '@');
+	    loc = loc.getPrev();
+	}
+	maze.set(loc.getPrev().getRow(), loc.getPrev().getCol(), 'S');
+    }
+
     private ArrayList<Location> getAdjacent (Location loc) {
 
 	ArrayList<Location> list = new ArrayList<Location>();
@@ -67,12 +96,16 @@ public class MazeSolver {
     }
 
     public String toString () {
-	return maze.toString();
+	if (animate) {
+	    return maze.toString(50);
+	} else {
+	    return maze.toString();
+	}
     }
 
     public static void main (String[] args) {
 
-	MazeSolver dank = new MazeSolver(new Maze(args[0]));
+	MazeSolver dank = new MazeSolver(args[0], true);
 
 	if (args.length != 2) {
 	    dank.solve();

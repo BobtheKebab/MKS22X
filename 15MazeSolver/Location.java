@@ -22,6 +22,10 @@ public class Location {
 	return col;
     }
 
+    public Location getPrev () {
+	return prev;
+    }
+
     public boolean isAStar () {
 	return aStar;
     }

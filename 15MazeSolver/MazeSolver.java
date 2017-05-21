@@ -4,14 +4,19 @@ public class MazeSolver {
 
     private Maze maze;
     private Frontier frontier;
+    private boolean animate;
     private final int[][] directions = { {0, -1},   // Left
 					 {0, 1},    // Right
 					 {1, 0},    // Up
 					 {-1, 0} }; // Down
-
     
     public MazeSolver (Maze mzzz) {
 	maze = mzzz;
+    }
+
+    public MazeSolver (Maze mzzz, boolean ani) {
+	maze = mzzz;
+	animate = ani;
     }
 
     public void solve () {
@@ -20,11 +25,17 @@ public class MazeSolver {
 
     public void solve (int style) {
 	switch (style) {
-	case 0 : depthFirstSearch();
-	case 1 : breadthFirstSearch();
-	case 2 : bestFirstSearch();
-	case 3 : aStarSearch();
+	case 0 : frontier = new StackFrontier();   // Depth
+	case 1 : frontier = new QueueFrontier();   // Breadth
+	case 2 : frontier = new PQFrontier();      // Best
+	case 3 : frontier = new PQFrontier(false); // A*
 	}
+
+	frontier.add(maze.getStart());
+	while (frontier.hasNext()) {
+	    
+	}
+	
     }
 
     private int getDist (Location loc1, Location loc2) {
@@ -53,26 +64,6 @@ public class MazeSolver {
 
 	return list;
 
-    }
-
-    private void depthFirstSearch () {
-	frontier = new StackFrontier();
-	// more stuff
-    }
-
-    private void breadthFirstSearch () {
-	frontier = new QueueFrontier();
-	// more stuff
-    }
-
-    private void bestFirstSearch () {
-	frontier = new PQFrontier(false);
-	// more stuff
-    }
-
-    private void aStarSearch () {
-	frontier = new PQFrontier(true);
-	// idek what this is tbh
     }
 
     public String toString () {

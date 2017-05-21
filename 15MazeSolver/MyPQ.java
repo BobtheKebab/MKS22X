@@ -36,6 +36,10 @@ public class MyPQ {
         return heap.get(1);
     }
 
+    public int getSize() {
+	return size;
+    }
+
     public String toString () {
         heap.remove(0);
 	String str = heap.toString();

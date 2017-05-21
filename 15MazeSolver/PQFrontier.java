@@ -16,4 +16,8 @@ public class PQFrontier implements Frontier {
 	return locations.remove();
     }
 
+    public boolean hasNext () {
+	return locations.getSize() > 0;
+    }
+
 }

@@ -12,4 +12,8 @@ public class StackFrontier implements Frontier {
 	return locations.pop();
     }
 
+    public boolean hasNext () {
+	return locations.size() > 0;
+    }
+
 }

@@ -4,6 +4,10 @@ public class QueueFrontier implements Frontier {
 
     private ArrayDeque<Location> locations;
 
+    public QueueFrontier () {
+	locations = new ArrayDeque<Location>();
+    }
+
     public void add (Location loc) {
 	locations.add(loc);
     }

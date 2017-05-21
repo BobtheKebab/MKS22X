@@ -43,7 +43,6 @@ public class MazeSolver {
 		maze.set(loc.getRow(), loc.getCol(), 'E');
 		traceBack(loc);
 		System.out.println(this);
-		System.out.println("GOT SOLUTION");
 		return;
 	    }
 	    

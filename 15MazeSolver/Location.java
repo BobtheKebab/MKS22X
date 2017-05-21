@@ -14,10 +14,26 @@ public class Location {
 	aStar = star;
     }
 
-    // Write accessors
+    public int getRow () {
+	return row;
+    }
+
+    public int getCol () {
+	return col;
+    }
+
+    public boolean isAStar () {
+	return aStar;
+    }
     
     public int getPriority () {
-	return Math.abs(dToStart - dToGoal);
+        int ans;
+	if (aStar) {
+	    ans = Math.abs(dToStart + dToGoal);
+	} else {
+	    ans = dToGoal;
+	}
+	return ans;
     }
 
     public int compareTo (Location other) {

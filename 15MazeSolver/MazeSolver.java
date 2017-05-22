@@ -28,7 +28,7 @@ public class MazeSolver {
 	switch (style) {
 	case 0 : frontier = new StackFrontier();   // Depth
 	case 1 : frontier = new QueueFrontier();   // Breadth
-	case 2 : frontier = new PQFrontier(true);  // Best
+	case 2 : frontier = new PQFrontier(false);  // Best
 	case 3 : frontier = new PQFrontier(false); // A*
 	}
 

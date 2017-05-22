@@ -1,4 +1,4 @@
-public class Location {
+public class Location implements Comparable<Location> {
 
     private int row, col;
     private int dToStart, dToGoal;
@@ -33,7 +33,7 @@ public class Location {
     public int getPriority () {
         int ans;
 	if (aStar) {
-	    ans = Math.abs(dToStart + dToGoal);
+	    ans = dToStart + dToGoal;
 	} else {
 	    ans = dToGoal;
 	}

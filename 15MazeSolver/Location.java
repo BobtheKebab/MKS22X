@@ -29,6 +29,10 @@ public class Location implements Comparable<Location> {
     public boolean isAStar () {
 	return aStar;
     }
+
+    public void setAStar(boolean bool) {
+	aStar = bool;
+    }
     
     public int getPriority () {
         int ans;

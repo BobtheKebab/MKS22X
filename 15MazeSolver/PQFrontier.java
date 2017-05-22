@@ -1,12 +1,6 @@
-import java.util.*;
-
 public class PQFrontier implements Frontier {
 
-    private MyPQ locations;
-
-    public PQFrontier (boolean bool) {
-	locations = new MyPQ(bool);
-    }
+    private MyPQ locations = new MyPQ();
 
     public void add (Location loc) {
 	locations.add(loc);

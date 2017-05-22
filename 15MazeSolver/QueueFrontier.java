@@ -1,12 +1,8 @@
-import java.util.*;
+import java.util.ArrayDeque;
 
 public class QueueFrontier implements Frontier {
 
-    private ArrayDeque<Location> locations;
-
-    public QueueFrontier () {
-	locations = new ArrayDeque<Location>();
-    }
+    private ArrayDeque<Location> locations = new ArrayDeque<Location>();
 
     public void add (Location loc) {
 	locations.add(loc);

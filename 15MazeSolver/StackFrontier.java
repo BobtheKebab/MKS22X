@@ -1,12 +1,8 @@
-import java.util.*;
+import java.util.Stack;
 
 public class StackFrontier implements Frontier {
 
-    private Stack<Location> locations;
-
-    public StackFrontier () {
-	locations = new Stack<Location>();
-    }
+    private Stack<Location> locations = new Stack<Location>();
 
     public void add (Location loc) {
 	locations.push(loc);

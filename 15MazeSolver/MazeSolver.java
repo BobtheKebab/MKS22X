@@ -24,12 +24,15 @@ public class MazeSolver {
     }
 
     public void solve (int style) {
-	
-	switch (style) {
-	case 0 : frontier = new StackFrontier();   // Depth
-	case 1 : frontier = new QueueFrontier();   // Breadth
-	case 2 : frontier = new PQFrontier();  // Best
-	case 3 : frontier = new PQFrontier(); // A*
+
+	if (style == 0) {
+	    frontier = new StackFrontier();
+	} else if (style == 1) {
+	    frontier = new QueueFrontier();
+	} else if (style == 2) {
+	    frontier = new PQFrontier();
+	} else if (style == 3) {
+	    frontier = new PQFrontier();
 	    maze.getStart().setAStar(true);
 	}
 

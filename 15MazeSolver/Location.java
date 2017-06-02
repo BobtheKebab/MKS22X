@@ -1,4 +1,4 @@
-public class Location {
+public class Location implements Comparable<Location> {
 
     private int row, col;
     private int dToStart, dToGoal;
@@ -14,10 +14,34 @@ public class Location {
 	aStar = star;
     }
 
-    // Write accessors
+    public int getRow () {
+	return row;
+    }
+
+    public int getCol () {
+	return col;
+    }
+
+    public Location getPrev () {
+	return prev;
+    }
+
+    public boolean isAStar () {
+	return aStar;
+    }
+
+    public void setAStar(boolean bool) {
+	aStar = bool;
+    }
     
     public int getPriority () {
-	return Math.abs(dToStart - dToGoal);
+        int ans;
+	if (aStar) {
+	    ans = dToStart + dToGoal;
+	} else {
+	    ans = dToGoal;
+	}
+	return ans;
     }
 
     public int compareTo (Location other) {

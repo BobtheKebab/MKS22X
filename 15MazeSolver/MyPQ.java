@@ -26,14 +26,23 @@ public class MyPQ {
 
     public Location remove () {
 	Location ans = heap.get(1);
-	heap.set(1, heap.remove(size));
-	pushDown();
+	//System.out.println(size);
+	//System.out.println(heap.size());
+	heap.set(1, heap.get(size));
+	heap.remove(size);
 	size--;
+	//System.out.println(size);
+	//System.out.println(heap.size());
+	pushDown();
 	return ans;
     }
 
     public Location peek () {
         return heap.get(1);
+    }
+
+    public int getSize() {
+	return size;
     }
 
     public String toString () {
@@ -78,6 +87,8 @@ public class MyPQ {
     public static void main (String[] args) {
 
 	MyPQ dank = new MyPQ();
+	dank.add(null);
+	dank.remove();
 
     }
 

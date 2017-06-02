@@ -15,7 +15,7 @@ public class Quiz2Redux {
 	if (index >= strOG.length()) {
 	    if (!ary.contains(str)) {
 		ary.add(str);
-		System.out.println(str);
+		//System.out.println(str);
 	    }
 	    return;
 	}
